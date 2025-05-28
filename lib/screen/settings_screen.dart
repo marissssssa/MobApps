@@ -1,52 +1,70 @@
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
         title: const Text('Pengaturan'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            _buildSettingsTile(
-              icon: Icons.person_outline,
-              title: 'Profil Saya',
-              onTap: () {
-                // 
-              },
+      body: Stack(
+        children: [
+          Positioned(
+            top: -30,
+            left: -40,
+            child: Opacity(
+              opacity: 0.7,
+              child: Icon(
+                Icons.settings_outlined,
+                size: 400,
+                color: const Color(0x3384BDC2),
+              ),
             ),
-            _buildLanguageDropdown(),
-            _buildSettingsTile(
-              icon: Icons.accessibility_new,
-              title: 'Mode Aksesibilitas',
-              onTap: () {
-                //
-              },
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                _buildSettingsTile(
+                  icon: Icons.person_outline,
+                  title: 'Profil Saya',
+                  onTap: () {
+                    //
+                  },
+                ),
+                _buildLanguageDropdown(),
+                _buildSettingsTile(
+                  icon: Icons.accessibility,
+                  title: 'Mode Aksesibilitas',
+                  onTap: () {
+                    //
+                  },
+                ),
+                _buildSettingsTile(
+                  icon: Icons.notifications_none,
+                  title: 'Notifikasi',
+                  onTap: () {
+                    //
+                  },
+                ),
+                _buildSettingsTile(
+                  icon: Icons.logout,
+                  title: 'Logout',
+                  onTap: () {
+                    //
+                  },
+                ),
+              ],
             ),
-            _buildSettingsTile(
-              icon: Icons.notifications_none,
-              title: 'Notifikasi',
-              onTap: () {
-                //
-              },
-            ),
-            _buildSettingsTile(
-              icon: Icons.logout,
-              title: 'Logout',
-              onTap: () {
-                //
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
