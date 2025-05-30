@@ -8,10 +8,16 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
-        title: const Text('Pengaturan'),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 0,
+        foregroundColor: Colors.black,
+        title: Row(
+          children: const [
+            Icon(Icons.settings_outlined, color: Colors.black),
+            SizedBox(width: 8),
+            Text('Pengaturan', style: TextStyle(color: Colors.black)),
+          ],
+        ),
       ),
       body: Stack(
         children: [
