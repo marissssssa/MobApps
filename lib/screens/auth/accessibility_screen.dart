@@ -18,10 +18,16 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
-        title: const Text('Mode Aksesibilitas'),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 0,
+        foregroundColor: Colors.black,
+        title: Row(
+          children: const [
+            Icon(Icons.accessibility, color: Colors.black),
+            SizedBox(width: 8),
+            Text('Mode Aksesibilitas', style: TextStyle(color: Colors.black)),
+          ],
+        ),
       ),
       body: Stack(
         children: [
@@ -47,6 +53,9 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                   title: 'Text-to-speech',
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
+
+
+
                 ),
                 _buildToggleTile(
                   icon: Icons.format_size,
@@ -87,9 +96,12 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
       child: ListTile(
         leading: Icon(icon, color: Colors.black54),
         title: Text(title),
-        trailing: Switch(
-          value: value,
-          onChanged: onChanged,
+        trailing: Transform.scale(
+          scale: 0.6, // Bisa ubah sesuai selera, misal 0.7 atau 0.6
+          child: Switch(
+            value: value,
+            onChanged: onChanged,
+          ),
         ),
       ),
     );
