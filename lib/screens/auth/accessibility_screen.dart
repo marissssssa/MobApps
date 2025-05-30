@@ -97,7 +97,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
         leading: Icon(icon, color: Colors.black54),
         title: Text(title),
         trailing: Transform.scale(
-          scale: 0.6, // Bisa ubah sesuai selera, misal 0.7 atau 0.6
+          scale: 0.75,
           child: Switch(
             value: value,
             onChanged: onChanged,
