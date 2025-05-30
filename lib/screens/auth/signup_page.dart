@@ -6,7 +6,9 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE1F1F2), // ganti warna background sesuai Figma
+      backgroundColor: const Color(
+        0xFFE1F1F2,
+      ), // ganti warna background sesuai Figma
       body: SafeArea(
         child: Column(
           children: [
@@ -32,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
                       color: Colors.black.withOpacity(0.1),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
-                    )
+                    ),
                   ],
                 ),
                 child: SingleChildScrollView(
@@ -56,16 +58,28 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(height: 20),
 
                       // Full Name
-                      buildTextField(Icons.person_outline, 'Full Name', 'add your full name'),
+                      buildTextField(
+                        Icons.person_outline,
+                        'Full Name',
+                        'add your full name',
+                      ),
 
                       // Email
-                      buildTextField(Icons.email_outlined, 'Email Address', 'add your email'),
+                      buildTextField(
+                        Icons.email_outlined,
+                        'Email Address',
+                        'add your email',
+                      ),
 
                       // Role
                       buildDropdown(),
 
                       // School
-                      buildTextField(Icons.school_outlined, 'School', 'add your institution'),
+                      buildTextField(
+                        Icons.school_outlined,
+                        'School',
+                        'add your institution',
+                      ),
 
                       const SizedBox(height: 24),
                       ElevatedButton(
@@ -79,10 +93,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         child: const Text(
                           'Next',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white, 
-                          ),
+                          style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     ],
@@ -114,7 +125,10 @@ class SignUpScreen extends StatelessWidget {
             hintText: hint,
             filled: true,
             fillColor: Colors.grey.shade200,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide.none,
@@ -142,7 +156,10 @@ class SignUpScreen extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.grey.shade200,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: BorderSide.none,

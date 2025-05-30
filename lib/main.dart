@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screen/signup_screen.dart'; // Panggil SignUpScreen di sini
+import 'screens/auth/signup_page.dart'; // Panggil SignUpScreen di sini
 // import 'screen/splash_screen.dart';
 // import 'screen/login_screen.dart';
 

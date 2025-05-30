@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // sesuaikan path jika perlu
+import 'login_page.dart'; // sesuaikan path jika perlu
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,10 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 80),
-            Image.asset(
-              'assets/images/LOGO.png',
-              width: 180,
-            ),
+            Image.asset('assets/images/LOGO.png', width: 180),
             const SizedBox(height: 20),
             const Text(
               'EduConnect',
