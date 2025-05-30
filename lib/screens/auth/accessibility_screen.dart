@@ -54,8 +54,6 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
 
-
-
                 ),
                 _buildToggleTile(
                   icon: Icons.format_size,
