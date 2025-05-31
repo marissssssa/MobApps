@@ -3,6 +3,8 @@ import 'package:educonnect/screens/guru/guru_homepage.dart';
 import 'package:educonnect/screens/siswa/siswa_homepage.dart';
 import 'package:educonnect/screens/orang_tua/orang_tua_homepage.dart';
 import 'package:educonnect/screens/profile/profile_page.dart';
+import 'package:educonnect/screens/siswa/materi_page.dart';
+import 'package:educonnect/screens/siswa/tugas_page.dart';
 
 // Enum untuk mendefinisikan peran pengguna. Ini lebih aman daripada menggunakan String.
 enum UserRole { guru, siswa, orangTua }
@@ -34,6 +36,8 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   List<Widget> _buildScreens() {
     return [
       _getHomepageForRole(), // Halaman utama sesuai peran
+      MateriPage(),     // Materi page
+      TugasPage(),      // Tugas page
       const ProfilePage(),
     ];
   }
@@ -52,6 +56,8 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Materi'),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Tugas'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
