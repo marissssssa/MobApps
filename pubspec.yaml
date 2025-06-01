@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  syncfusion_flutter_pdfviewer: ^29.2.7
+  path_provider: ^2.0.15
   flutter:
     sdk: flutter
   provider: 6.1.5
@@ -63,6 +65,8 @@ flutter:
 
   assets:
     - assets/images/LOGO.png
+    - assets/materi/Aljabar.pdf
+    - assets/materi/Gerak Lurus Beraturan.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

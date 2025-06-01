@@ -3,7 +3,9 @@ import 'materi_page.dart';
 import 'tugas_page.dart';
 
 class SiswaHomepage extends StatelessWidget {
-  const SiswaHomepage({super.key});
+  final void Function(String subject) onSubjectSelected;
+
+  const SiswaHomepage({super.key, required this.onSubjectSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +108,8 @@ Widget _buildMaterialsGrid(BuildContext context) {
 Widget _buildMaterialCard(BuildContext context, IconData icon, String title, Color color) {
   return GestureDetector(
     onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MateriPage()),
-      );
+      // Panggil callback yang dikirim dari MainDashboardPage
+      onSubjectSelected(title);
     },
     child: Card(
       color: color.withOpacity(0.1),

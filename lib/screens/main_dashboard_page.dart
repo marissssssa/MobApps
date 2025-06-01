@@ -20,6 +20,14 @@ class MainDashboardPage extends StatefulWidget {
 
 class _MainDashboardPageState extends State<MainDashboardPage> {
   int _selectedIndex = 0; // Index untuk item navigasi bawah yang aktif
+  String _selectedSubject = 'All';
+
+  void _navigateToSubject(String subject) {
+    setState(() {
+      _selectedSubject = subject;
+      _selectedIndex = 1; // ke tab Materi
+    });
+  }
 
   // Fungsi untuk memilih halaman mana yang akan ditampilkan berdasarkan peran
   Widget _getHomepageForRole() {
@@ -27,7 +35,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       case UserRole.guru:
         return const GuruHomepage();
       case UserRole.siswa:
-        return const SiswaHomepage();
+        return SiswaHomepage(onSubjectSelected: _navigateToSubject);
       case UserRole.orangTua:
         return const OrangTuaHomepage();
     }
@@ -36,7 +44,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   List<Widget> _buildScreens() {
     return [
       _getHomepageForRole(), // Halaman utama sesuai peran
-      MateriPage(),     // Materi page
+      MateriPage(selectedSubject: _selectedSubject),     // Materi page
       TugasPage(),      // Tugas page
       const ProfilePage(),
     ];
@@ -45,6 +53,11 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+
+      // Reset subject jika keluar dari tab materi
+      if (index != 1) {
+        _selectedSubject = 'All';
+      }
     });
   }
 
@@ -56,8 +69,8 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Materi'),
-          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Tugas'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Material'),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Task'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
