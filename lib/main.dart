@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: highContrastTheme,
       themeMode: themeProvider.isHighContrast ? ThemeMode.dark : ThemeMode.light,
-      home: const SettingsScreen(),
+      home: const SignupScreen(),
     );
   }
 }
