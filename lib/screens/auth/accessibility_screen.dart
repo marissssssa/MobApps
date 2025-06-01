@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
 
 class AccessibilityScreen extends StatefulWidget {
   const AccessibilityScreen({Key? key}) : super(key: key);
@@ -15,6 +21,8 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
@@ -22,10 +30,10 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
         elevation: 0,
         foregroundColor: Colors.black,
         title: Row(
-          children: const [
-            Icon(Icons.accessibility, color: Colors.black),
-            SizedBox(width: 8),
-            Text('Mode Aksesibilitas', style: TextStyle(color: Colors.black)),
+          children: [
+            const Icon(Icons.settings_outlined, color: Colors.black),
+            const SizedBox(width: 8),
+            Text(local.accessibilityMode, style: const TextStyle(color: Colors.black)),
           ],
         ),
       ),
@@ -50,26 +58,26 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
               children: [
                 _buildToggleTile(
                   icon: Icons.record_voice_over,
-                  title: 'Text-to-speech',
+                  title: local.textToSpeech,
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
 
                 ),
                 _buildToggleTile(
                   icon: Icons.format_size,
-                  title: 'Teks Besar',
+                  title: local.largeText,
                   value: largeText,
                   onChanged: (val) => setState(() => largeText = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.closed_caption,
-                  title: 'Subtitle Otomatis',
+                  title: local.autoSubtitle,
                   value: autoSubtitle,
                   onChanged: (val) => setState(() => autoSubtitle = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.contrast,
-                  title: 'Mode Kontras Tinggi',
+                  title: local.highContrast,
                   value: highContrast,
                   onChanged: (val) => setState(() => highContrast = val),
                 ),
