@@ -31,7 +31,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
         foregroundColor: Colors.black,
         title: Row(
           children: [
-            const Icon(Icons.settings_outlined, color: Colors.black),
+            const Icon(Icons.accessibility_new, color: Colors.black),
             const SizedBox(width: 8),
             Text(local.accessibilityMode, style: const TextStyle(color: Colors.black)),
           ],
@@ -45,7 +45,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
             child: Opacity(
               opacity: 0.7,
               child: Icon(
-                Icons.accessibility,
+                Icons.accessibility_new,
                 size: 400,
                 color: const Color(0x3384BDC2),
               ),
