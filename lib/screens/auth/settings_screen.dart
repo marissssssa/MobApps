@@ -32,10 +32,10 @@ class SettingsScreen extends StatelessWidget {
             top: -30,
             left: -40,
             child: Opacity(
-              opacity: 0.2,
+              opacity: 0.7,
               child: Icon(
                 Icons.settings_outlined,
-                size: 390,
+                size: 400,
                 color: const Color(0x3384BDC2),
               ),
             ),
