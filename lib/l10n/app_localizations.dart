@@ -130,6 +130,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logout;
+
+  /// No description provided for @textToSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'Text-to-speech'**
+  String get textToSpeech;
+
+  /// No description provided for @largeText.
+  ///
+  /// In en, this message translates to:
+  /// **'Large Text'**
+  String get largeText;
+
+  /// No description provided for @autoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic Subtitles'**
+  String get autoSubtitle;
+
+  /// No description provided for @highContrast.
+  ///
+  /// In en, this message translates to:
+  /// **'High Contrast Mode'**
+  String get highContrast;
+
+  /// No description provided for @notification.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notification;
+
+  /// No description provided for @taskNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'New Task'**
+  String get taskNotification;
+
+  /// No description provided for @announcement.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcement;
+
+  /// No description provided for @reminderNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule Reminder'**
+  String get reminderNotification;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
