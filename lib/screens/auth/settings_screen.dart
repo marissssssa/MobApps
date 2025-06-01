@@ -1,3 +1,5 @@
+import 'package:educonnect/screens/auth/accessibility_screen.dart';
+import 'package:educonnect/screens/auth/notification_screen.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -53,12 +55,22 @@ class SettingsScreen extends StatelessWidget {
                 _buildSettingsTile(
                   icon: Icons.accessibility_new_outlined,
                   title: local.accessibilityMode,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const AccessibilityScreen()),
+                    );
+                  },
                 ),
                 _buildSettingsTile(
                   icon: Icons.notifications_none,
                   title: local.notifications,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const NotificationScreen()),
+                    );
+                  },
                 ),
                 _buildSettingsTile(
                   icon: Icons.logout,
