@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -14,14 +19,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: const Color(0xFFEEEEEE),
       appBar: AppBar(
         title: Row(
-          children: const [
-            Icon(Icons.notifications, color: Colors.black),
-            SizedBox(width: 8),
-            Text('Notifikasi', style: TextStyle(color: Colors.black)),
+          children: [
+            const Icon(Icons.notifications, color: Colors.black),
+            const SizedBox(width: 8),
+            Text(local.notification, style: const TextStyle(color: Colors.black)),
           ],
         ),
         backgroundColor: Colors.white,
@@ -48,19 +55,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
               children: [
                 _buildToggleTile(
                   icon: Icons.assignment,
-                  title: 'Tugas Baru',
+                  title: local.taskNotification,
                   value: taskNotification,
                   onChanged: (val) => setState(() => taskNotification = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.campaign,
-                  title: 'Pengumuman',
+                  title: local.announcement,
                   value: announcementNotification,
                   onChanged: (val) => setState(() => announcementNotification = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.alarm,
-                  title: 'Pengingat Jadwal',
+                  title: local.reminderNotification,
                   value: reminderNotification,
                   onChanged: (val) => setState(() => reminderNotification = val),
                 ),
