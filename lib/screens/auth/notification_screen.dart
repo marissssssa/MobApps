@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -22,18 +23,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
     final local = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        elevation: 0,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
         title: Row(
           children: [
-            const Icon(Icons.notifications, color: Colors.black),
+            Icon(Icons.notifications, color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.notification, style: const TextStyle(color: Colors.black)),
-          ],
+            Text(local.notification, style: TextStyle(color: Theme.of(context).iconTheme.color)),
+            ],
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        foregroundColor: Colors.black,
       ),
       body: Stack(
         children: [
@@ -90,7 +91,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),
+        leading: Icon(icon, color: Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: Transform.scale(
           scale: 0.75,

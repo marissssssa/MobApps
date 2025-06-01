@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class AccessibilityScreen extends StatefulWidget {
   const AccessibilityScreen({Key? key}) : super(key: key);
@@ -24,16 +24,17 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     final local = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
+
         title: Row(
           children: [
-            const Icon(Icons.accessibility_new, color: Colors.black),
+            Icon(Icons.accessibility_new, color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.accessibilityMode, style: const TextStyle(color: Colors.black)),
+            Text(local.accessibilityMode, style: TextStyle(color: Theme.of(context).iconTheme.color)),
           ],
         ),
       ),
@@ -79,7 +80,10 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                   icon: Icons.contrast,
                   title: local.highContrast,
                   value: highContrast,
-                  onChanged: (val) => setState(() => highContrast = val),
+                  onChanged: (val) {
+                    setState(() => highContrast = val);
+                    Provider.of<ThemeProvider>(context, listen: false).toggleHighContrast(val);
+                  },
                 ),
               ],
             ),
@@ -100,7 +104,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),
+        leading: Icon(icon, color: Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: Transform.scale(
           scale: 0.75,

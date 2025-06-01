@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -15,16 +16,16 @@ class SettingsScreen extends StatelessWidget {
     final local = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
         title: Row(
           children: [
-            const Icon(Icons.settings_outlined, color: Colors.black),
+            Icon(Icons.settings_outlined, color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.settings, style: const TextStyle(color: Colors.black)),
+            Text(local.settings, style: TextStyle(color: Theme.of(context).iconTheme.color)),
           ],
         ),
       ),
@@ -95,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),
+        leading: Icon(icon, color: Colors.black54),//Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
@@ -112,7 +113,7 @@ class SettingsScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: const Icon(Icons.language, color: Colors.black54),
+        leading: Icon(Icons.language, color: Colors.black54),
         title: Text(local.language),
         trailing: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
