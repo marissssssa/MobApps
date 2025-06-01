@@ -25,4 +25,28 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get logout => 'Keluar';
+
+  @override
+  String get textToSpeech => 'Text-to-speech';
+
+  @override
+  String get largeText => 'Teks Besar';
+
+  @override
+  String get autoSubtitle => 'Subtitle Otomatis';
+
+  @override
+  String get highContrast => 'Mode Kontras Tinggi';
+
+  @override
+  String get notification => 'Notifikasi';
+
+  @override
+  String get taskNotification => 'Tugas Baru';
+
+  @override
+  String get announcement => 'Pengumuman';
+
+  @override
+  String get reminderNotification => 'Pengingat Jadwal';
 }
