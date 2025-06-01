@@ -25,4 +25,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Logout';
+
+  @override
+  String get textToSpeech => 'Text-to-speech';
+
+  @override
+  String get largeText => 'Large Text';
+
+  @override
+  String get autoSubtitle => 'Automatic Subtitles';
+
+  @override
+  String get highContrast => 'High Contrast Mode';
+
+  @override
+  String get notification => 'Notifications';
+
+  @override
+  String get taskNotification => 'New Task';
+
+  @override
+  String get announcement => 'Announcements';
+
+  @override
+  String get reminderNotification => 'Schedule Reminder';
 }
