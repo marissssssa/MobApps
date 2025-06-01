@@ -48,12 +48,14 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               children: [
                 _buildSettingsTile(
+                  context: context,
                   icon: Icons.person_outline,
                   title: local.myProfile,
                   onTap: () {},
                 ),
                 _buildLanguageDropdown(context, local),
                 _buildSettingsTile(
+                  context: context,
                   icon: Icons.accessibility_new_outlined,
                   title: local.accessibilityMode,
                   onTap: () {
@@ -64,6 +66,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 _buildSettingsTile(
+                  context: context,
                   icon: Icons.notifications_none,
                   title: local.notifications,
                   onTap: () {
@@ -74,6 +77,7 @@ class SettingsScreen extends StatelessWidget {
                   },
                 ),
                 _buildSettingsTile(
+                  context: context,
                   icon: Icons.logout,
                   title: local.logout,
                   onTap: () {},
@@ -87,6 +91,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _buildSettingsTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required VoidCallback onTap,
@@ -96,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),//Theme.of(context).iconTheme.color),
+        leading: Icon(icon, color: Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
@@ -113,7 +118,7 @@ class SettingsScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(Icons.language, color: Colors.black54),
+        leading: Icon(Icons.language, color: Theme.of(context).iconTheme.color),
         title: Text(local.language),
         trailing: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
