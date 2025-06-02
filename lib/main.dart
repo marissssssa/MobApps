@@ -1,21 +1,26 @@
+// lib/main.dart
+
 import 'package:flutter/material.dart';
-import 'screens/auth/signup_page.dart'; // Panggil SignUpScreen di sini
-// import 'screen/splash_screen.dart';
-// import 'screen/login_screen.dart';
+import 'screens/guru/guru_homepage.dart'; // Pastikan path sesuai: lib/screens/guru/guru_homepage.dart
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'EduConnect',
-      home: const SignUpScreen(), // Ganti ke SignUpScreen
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const GuruHomepage(), // Halaman utama kita
     );
   }
 }
