@@ -1,18 +1,19 @@
-# pubspec.yaml (letakkan di root: MobApps/pubspec.yaml)
 name: mobapps
-description: A Flutter project untuk “Homepage Guru”
-publish_to: "none"
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -21,7 +22,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  # Karena kamu tidak memakai aset gambar apa pun, bagian ini dikomentari:
-  # assets:
-  #   - assets/images/

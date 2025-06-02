@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class AccessibilityScreen extends StatefulWidget {
   const AccessibilityScreen({Key? key}) : super(key: key);
@@ -15,17 +21,20 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
+
         title: Row(
-          children: const [
-            Icon(Icons.accessibility, color: Colors.black),
-            SizedBox(width: 8),
-            Text('Mode Aksesibilitas', style: TextStyle(color: Colors.black)),
+          children: [
+            Icon(Icons.accessibility_new, color: Theme.of(context).iconTheme.color),
+            const SizedBox(width: 8),
+            Text(local.accessibilityMode, style: TextStyle(color: Theme.of(context).iconTheme.color)),
           ],
         ),
       ),
@@ -37,7 +46,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
             child: Opacity(
               opacity: 0.7,
               child: Icon(
-                Icons.accessibility,
+                Icons.accessibility_new,
                 size: 400,
                 color: const Color(0x3384BDC2),
               ),
@@ -50,28 +59,31 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
               children: [
                 _buildToggleTile(
                   icon: Icons.record_voice_over,
-                  title: 'Text-to-speech',
+                  title: local.textToSpeech,
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
 
                 ),
                 _buildToggleTile(
                   icon: Icons.format_size,
-                  title: 'Teks Besar',
+                  title: local.largeText,
                   value: largeText,
                   onChanged: (val) => setState(() => largeText = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.closed_caption,
-                  title: 'Subtitle Otomatis',
+                  title: local.autoSubtitle,
                   value: autoSubtitle,
                   onChanged: (val) => setState(() => autoSubtitle = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.contrast,
-                  title: 'Mode Kontras Tinggi',
+                  title: local.highContrast,
                   value: highContrast,
-                  onChanged: (val) => setState(() => highContrast = val),
+                  onChanged: (val) {
+                    setState(() => highContrast = val);
+                    Provider.of<ThemeProvider>(context, listen: false).toggleHighContrast(val);
+                  },
                 ),
               ],
             ),
@@ -92,7 +104,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),
+        leading: Icon(icon, color: Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: Transform.scale(
           scale: 0.75,

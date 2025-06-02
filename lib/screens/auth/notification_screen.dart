@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -14,19 +20,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFEEEEEE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Row(
-          children: const [
-            Icon(Icons.notifications, color: Colors.black),
-            SizedBox(width: 8),
-            Text('Notifikasi', style: TextStyle(color: Colors.black)),
-          ],
-        ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
+        title: Row(
+          children: [
+            Icon(Icons.notifications, color: Theme.of(context).iconTheme.color),
+            const SizedBox(width: 8),
+            Text(local.notification, style: TextStyle(color: Theme.of(context).iconTheme.color)),
+            ],
+        ),
       ),
       body: Stack(
         children: [
@@ -48,19 +56,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
               children: [
                 _buildToggleTile(
                   icon: Icons.assignment,
-                  title: 'Tugas Baru',
+                  title: local.taskNotification,
                   value: taskNotification,
                   onChanged: (val) => setState(() => taskNotification = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.campaign,
-                  title: 'Pengumuman',
+                  title: local.announcement,
                   value: announcementNotification,
                   onChanged: (val) => setState(() => announcementNotification = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.alarm,
-                  title: 'Pengingat Jadwal',
+                  title: local.reminderNotification,
                   value: reminderNotification,
                   onChanged: (val) => setState(() => reminderNotification = val),
                 ),
@@ -83,7 +91,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(icon, color: Colors.black54),
+        leading: Icon(icon, color: Theme.of(context).iconTheme.color),
         title: Text(title),
         trailing: Transform.scale(
           scale: 0.75,

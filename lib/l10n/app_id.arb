@@ -1,0 +1,17 @@
+{
+  "settings": "Pengaturan",
+  "myProfile": "Profil Saya",
+  "language": "Bahasa",
+  "accessibilityMode": "Mode Aksesibilitas",
+  "notifications": "Notifikasi",
+  "logout": "Keluar",
+  "textToSpeech": "Text-to-speech",
+  "largeText": "Teks Besar",
+  "autoSubtitle": "Subtitle Otomatis",
+  "highContrast": "Mode Kontras Tinggi",
+  "notification": "Notifikasi",
+  "taskNotification": "Tugas Baru",
+  "announcement": "Pengumuman",
+  "reminderNotification": "Pengingat Jadwal"
+
+}

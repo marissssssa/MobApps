@@ -1,0 +1,17 @@
+{
+  "settings": "Settings",
+  "myProfile": "My Profile",
+  "language": "Language",
+  "accessibilityMode": "Accessibility Mode",
+  "notifications": "Notifications",
+  "logout": "Logout",
+  "textToSpeech": "Text-to-speech",
+  "largeText": "Large Text",
+  "autoSubtitle": "Automatic Subtitles",
+  "highContrast": "High Contrast Mode",
+  "notification": "Notifications",
+  "taskNotification": "New Task",
+  "announcement": "Announcements",
+  "reminderNotification": "Schedule Reminder"
+
+}
