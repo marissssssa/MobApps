@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
-
-// ✅ Import halaman siswa
 import 'screens/siswa/siswa_homepage.dart';
 
 final ThemeData highContrastTheme = ThemeData(
@@ -65,11 +63,8 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.isHighContrast
           ? ThemeMode.dark
           : ThemeMode.light,
-
-      // ✅ Langsung ke SiswaHomepage
       home: SiswaHomepage(
         onSubjectSelected: (subject) {
-          // Sementara cuma print ke console
           debugPrint("Subject selected: $subject");
         },
       ),
