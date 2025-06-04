@@ -86,47 +86,62 @@ class SiswaHomepage extends StatelessWidget {
     );
   }
 
-Widget _buildMaterialsGrid(BuildContext context) {
-  return GridView.count(
-    crossAxisCount: 2,
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    crossAxisSpacing: 16,
-    mainAxisSpacing: 16,
-    childAspectRatio: 2.5, // Mengatur rasio lebar:tinggi kartu
-    children: [
-      _buildMaterialCard(context, Icons.calculate, "Mathematics", Colors.orange),
-      _buildMaterialCard(context, Icons.biotech, "Biology", Colors.green),
-      _buildMaterialCard(context, Icons.science, "Chemistry", Colors.blue),
-      _buildMaterialCard(context, Icons.rocket_launch, "Physics", Colors.purple),
-      _buildMaterialCard(context, Icons.history_edu, "History", Colors.red),
-      _buildMaterialCard(context, Icons.flag, "Citizenship", Colors.teal),
-    ],
-  );
-}
+  Widget _buildMaterialsGrid(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      childAspectRatio: 2.5, // Mengatur rasio lebar:tinggi kartu
+      children: [
+        _buildMaterialCard(
+          context,
+          Icons.calculate,
+          "Mathematics",
+          Colors.orange,
+        ),
+        _buildMaterialCard(context, Icons.biotech, "Biology", Colors.green),
+        _buildMaterialCard(context, Icons.science, "Chemistry", Colors.blue),
+        _buildMaterialCard(
+          context,
+          Icons.rocket_launch,
+          "Physics",
+          Colors.purple,
+        ),
+        _buildMaterialCard(context, Icons.history_edu, "History", Colors.red),
+        _buildMaterialCard(context, Icons.flag, "Citizenship", Colors.teal),
+      ],
+    );
+  }
 
-Widget _buildMaterialCard(BuildContext context, IconData icon, String title, Color color) {
-  return GestureDetector(
-    onTap: () {
-      // Panggil callback yang dikirim dari MainDashboardPage
-      onSubjectSelected(title);
-    },
-    child: Card(
-      color: color.withOpacity(0.1),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 0,
-      child: Center(
-        child: ListTile(
-          leading: Icon(icon, color: color),
-          title: Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+  Widget _buildMaterialCard(
+    BuildContext context,
+    IconData icon,
+    String title,
+    Color color,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        // Panggil callback yang dikirim dari MainDashboardPage
+        onSubjectSelected(title);
+      },
+      child: Card(
+        color: color.withOpacity(0.1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 0,
+        child: Center(
+          child: ListTile(
+            leading: Icon(icon, color: color),
+            title: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildHomeworkItem(BuildContext context, String title, String date) {
     return GestureDetector(
@@ -141,7 +156,10 @@ Widget _buildMaterialCard(BuildContext context, IconData icon, String title, Col
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: const Icon(Icons.assignment, color: Colors.blueAccent),
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
           subtitle: Text(date),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         ),
