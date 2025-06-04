@@ -144,8 +144,8 @@ class SignUpScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        Row(
-          children: const [
+        const Row(
+          children: [
             Icon(Icons.person_2_outlined, size: 20),
             SizedBox(width: 8),
             Text('Role'),

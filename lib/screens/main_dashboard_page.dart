@@ -1,18 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:mobapps/screens/guru/guru_homepage.dart'; // 🔑 Import perbaikan
-
-/// Contoh halaman dashboard sederhana yang memanggil GuruHomepage.
-/// Jika nanti kamu ingin menambahkan tab Siswa/Homepage lain,
-/// tambahkan import dan navigasi di sini.
-class MainDashboardPage extends StatelessWidget {
-  const MainDashboardPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Untuk sekarang kita langsung menampilkan GuruHomepage.
-    return const GuruHomepage();
-=======
 import 'package:educonnect/screens/guru/guru_homepage.dart';
 import 'package:educonnect/screens/siswa/siswa_homepage.dart';
 import 'package:educonnect/screens/orang_tua/orang_tua_homepage.dart';
@@ -20,7 +6,7 @@ import 'package:educonnect/screens/profile/profile_page.dart';
 import 'package:educonnect/screens/siswa/materi_page.dart';
 import 'package:educonnect/screens/siswa/tugas_page.dart';
 
-// Enum untuk mendefinisikan peran pengguna. Ini lebih aman daripada menggunakan String.
+// Enum untuk mendefinisikan peran pengguna.
 enum UserRole { guru, siswa, orangTua }
 
 class MainDashboardPage extends StatefulWidget {
@@ -39,7 +25,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   void _navigateToSubject(String subject) {
     setState(() {
       _selectedSubject = subject;
-      _selectedIndex = 1; // ke tab Materi
+      _selectedIndex = 1; // Pindah ke tab Materi
     });
   }
 
@@ -55,20 +41,21 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     }
   }
 
+  // Membangun daftar layar yang akan ditampilkan di BottomNavigationBar
   List<Widget> _buildScreens() {
     return [
       _getHomepageForRole(), // Halaman utama sesuai peran
-      MateriPage(selectedSubject: _selectedSubject),     // Materi page
-      TugasPage(),      // Tugas page
+      MateriPage(selectedSubject: _selectedSubject),
+      const TugasPage(),
       const ProfilePage(),
     ];
   }
 
+  // Fungsi yang dipanggil saat item navigasi bawah di-tap
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
-      // Reset subject jika keluar dari tab materi
+      // Reset filter subjek jika pengguna pindah dari tab materi
       if (index != 1) {
         _selectedSubject = 'All';
       }
@@ -89,9 +76,11 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.fixed, // Agar semua label terlihat
+        // Sebaiknya tentukan warna agar sesuai dengan tema aplikasi
+        // selectedItemColor: Colors.blue,
+        // unselectedItemColor: Colors.grey,
       ),
     );
->>>>>>> f4841ee8c5135e24e1306c9ff81ecfe5e95112ac
   }
 }

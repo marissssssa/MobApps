@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'screens/guru/guru_homepage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'screens/auth/signup_page.dart';
-import 'screens/auth/settings_screen.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
+
+// LANGKAH 1: Definisikan kedua tema
+// Anda bisa mengkustomisasi tema normal ini sesuai kebutuhan
+final ThemeData normalTheme = ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: Colors.teal,
+  // Tambahkan kustomisasi lain jika perlu
+);
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Colors.black,
   primaryColor: Colors.white,
-  colorScheme: ColorScheme.highContrastDark(),
+  colorScheme: const ColorScheme.highContrastDark(),
   textTheme: const TextTheme(
     bodyLarge: TextStyle(fontSize: 18, color: Colors.white),
     bodyMedium: TextStyle(fontSize: 16, color: Colors.white),
@@ -31,6 +37,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        // LANGKAH 2: Perbaiki cara membuat ThemeProvider. Tidak perlu argumen.
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: const MyApp(),
@@ -48,7 +55,8 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'MobApps',
-      theme: highContrastTheme,
+      // LANGKAH 3: Gunakan provider untuk memilih tema secara dinamis
+      theme: themeProvider.isHighContrast ? highContrastTheme : normalTheme,
       locale: localeProvider.locale,
       supportedLocales: const [
         Locale('en'),

@@ -13,20 +13,72 @@ class MateriPage extends StatefulWidget {
 class _MateriPageState extends State<MateriPage> {
   late String selectedSubject;
 
-  final List<String> subjects = ['All', 'Biology', 'Chemistry', 'Citizenship', 'History', 'Mathematics', 'Physics'];
+  final List<String> subjects = [
+    'All',
+    'Biology',
+    'Chemistry',
+    'Citizenship',
+    'History',
+    'Mathematics',
+    'Physics'
+  ];
   final List<Map<String, dynamic>> materials = [
-    {'subject': 'Biology', 'type': Icons.description, 'label': 'Sistem Organ Manusia'},
-    {'subject': 'Biology', 'type': Icons.volume_up, 'label': 'Sel dan Jaringan'},
-    {'subject': 'Chemistry', 'type': Icons.description, 'label': 'Reaksi Kimia'},
-    {'subject': 'Chemistry', 'type': Icons.play_circle_filled, 'label': 'Struktur Atom'},
-    {'subject': 'Citizenship', 'type': Icons.description, 'label': 'Hak dan Kewajiban Warga Negara'},
-    {'subject': 'History', 'type': Icons.play_circle_filled, 'label': 'Perang Dunia II'},
-    {'subject': 'History', 'type': Icons.description, 'label': 'Kemerdekaan Indonesia'},
-    {'subject': 'Mathematics', 'type': Icons.description, 'label': 'Aljabar Dasar'},
+    {
+      'subject': 'Biology',
+      'type': Icons.description,
+      'label': 'Sistem Organ Manusia'
+    },
+    {
+      'subject': 'Biology',
+      'type': Icons.volume_up,
+      'label': 'Sel dan Jaringan'
+    },
+    {
+      'subject': 'Chemistry',
+      'type': Icons.description,
+      'label': 'Reaksi Kimia'
+    },
+    {
+      'subject': 'Chemistry',
+      'type': Icons.play_circle_filled,
+      'label': 'Struktur Atom'
+    },
+    {
+      'subject': 'Citizenship',
+      'type': Icons.description,
+      'label': 'Hak dan Kewajiban Warga Negara'
+    },
+    {
+      'subject': 'History',
+      'type': Icons.play_circle_filled,
+      'label': 'Perang Dunia II'
+    },
+    {
+      'subject': 'History',
+      'type': Icons.description,
+      'label': 'Kemerdekaan Indonesia'
+    },
+    {
+      'subject': 'Mathematics',
+      'type': Icons.description,
+      'label': 'Aljabar Dasar'
+    },
     {'subject': 'Mathematics', 'type': Icons.volume_up, 'label': 'Geometri'},
-    {'subject': 'Physics', 'type': Icons.play_circle_filled, 'label': 'Hukum Newton'},
-    {'subject': 'Physics', 'type': Icons.description, 'label': 'Gerak Lurus Beraturan'},
-    {'subject': 'Physics', 'type': Icons.description, 'label': 'Gerak Lurus Tidak Beraturan'},
+    {
+      'subject': 'Physics',
+      'type': Icons.play_circle_filled,
+      'label': 'Hukum Newton'
+    },
+    {
+      'subject': 'Physics',
+      'type': Icons.description,
+      'label': 'Gerak Lurus Beraturan'
+    },
+    {
+      'subject': 'Physics',
+      'type': Icons.description,
+      'label': 'Gerak Lurus Tidak Beraturan'
+    },
   ];
 
   @override
@@ -36,7 +88,7 @@ class _MateriPageState extends State<MateriPage> {
   }
 
   @override
-    void didUpdateWidget(covariant MateriPage oldWidget) {
+  void didUpdateWidget(covariant MateriPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedSubject != widget.selectedSubject) {
       setState(() {
@@ -57,7 +109,10 @@ class _MateriPageState extends State<MateriPage> {
       {'title': 'Aljabar', 'filePath': 'assets/materi/Aljabar.pdf'},
     ],
     'Gerak Lurus Beraturan': [
-      {'title': 'Gerak Lurus Beraturan', 'filePath': 'assets/materi/Gerak Lurus Beraturan.pdf'},
+      {
+        'title': 'Gerak Lurus Beraturan',
+        'filePath': 'assets/materi/Gerak Lurus Beraturan.pdf'
+      },
     ],
     // Tambahkan materi lainnya di sini jika perlu
   };
@@ -119,7 +174,7 @@ class _MateriPageState extends State<MateriPage> {
                   },
                 ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class GuruHomepage extends StatelessWidget {
-  const GuruHomepage({Key? key}) : super(key: key);
+  const GuruHomepage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +49,16 @@ class GuruHomepage extends StatelessWidget {
     );
   }
 
-  /// BATASI LEBAR & SAFE AREA selesai di atas. Selanjutnya: komponen‐komponen.
-
-  /// ======== HEADER ========
   Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         children: [
           // Kolom teks “Hello,” + “Esther Howard!” + “(Teacher)”
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 SizedBox(height: 4),
                 Text(
                   'Hello,',
@@ -120,10 +117,10 @@ class GuruHomepage extends StatelessWidget {
           Container(
             width: 44,
             height: 44,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFFD8CCFF),
-              image: const DecorationImage(
+              color: Color(0xFFD8CCFF),
+              image: DecorationImage(
                 image: NetworkImage('https://i.pravatar.cc/150?img=47'),
                 fit: BoxFit.cover,
               ),
@@ -195,8 +192,8 @@ class GuruHomepage extends StatelessWidget {
             Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE5F1FF),
+              decoration: const BoxDecoration(
+                color: Color(0xFFE5F1FF),
                 shape: BoxShape.circle,
               ),
               child: Icon(

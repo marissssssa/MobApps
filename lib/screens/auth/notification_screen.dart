@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:educonnect/providers/locale_provider.dart';
-import 'package:educonnect/providers/theme_provider.dart';
 
 class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
+  const NotificationScreen({super.key});
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
@@ -32,13 +28,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: [
             Icon(Icons.notifications, color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.notification, style: TextStyle(color: Theme.of(context).iconTheme.color)),
-            ],
+            Text(local.notification,
+                style: TextStyle(color: Theme.of(context).iconTheme.color)),
+          ],
         ),
       ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: -40,
             left: -50,
             child: Opacity(
@@ -46,7 +43,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               child: Icon(
                 Icons.notifications_active,
                 size: 400,
-                color: const Color(0x3384BDC2),
+                color: Color(0x3384BDC2),
               ),
             ),
           ),
@@ -64,13 +61,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   icon: Icons.campaign,
                   title: local.announcement,
                   value: announcementNotification,
-                  onChanged: (val) => setState(() => announcementNotification = val),
+                  onChanged: (val) =>
+                      setState(() => announcementNotification = val),
                 ),
                 _buildToggleTile(
                   icon: Icons.alarm,
                   title: local.reminderNotification,
                   value: reminderNotification,
-                  onChanged: (val) => setState(() => reminderNotification = val),
+                  onChanged: (val) =>
+                      setState(() => reminderNotification = val),
                 ),
               ],
             ),

@@ -1,0 +1,8 @@
+# Lokasi folder yang berisi file .arb
+arb-dir: lib/l10n
+
+# File template yang menjadi acuan
+template-arb-file: app_en.arb
+
+# Nama file Dart yang akan dihasilkan
+output-localization-file: app_localizations.dart

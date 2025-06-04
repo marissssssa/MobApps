@@ -38,13 +38,21 @@ class ClassItemCard extends StatelessWidget {
               children: [
                 Icon(Icons.access_time, size: 16, color: Colors.grey[600]),
                 const SizedBox(width: 4),
-                Text(time, style: TextStyle(color: Colors.grey[600])),
+                // --- PERBAIKAN 1 ---
+                // Bungkus Text dengan Flexible agar bisa menyesuaikan diri
+                Flexible(
+                  child: Text(time, style: TextStyle(color: Colors.grey[600])),
+                ),
                 const Spacer(),
                 Icon(Icons.people, size: 16, color: Colors.grey[600]),
                 const SizedBox(width: 4),
-                Text(
-                  "$students Students",
-                  style: TextStyle(color: Colors.grey[600]),
+                // --- PERBAIKAN 2 ---
+                // Bungkus Text ini juga dengan Flexible
+                Flexible(
+                  child: Text(
+                    "$students Students",
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
                 ),
               ],
             ),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
+// 'flutter_localizations' dihapus dari sini
 import 'package:provider/provider.dart';
-import 'package:educonnect/providers/locale_provider.dart';
+// 'locale_provider' dihapus dari sini
 import 'package:educonnect/providers/theme_provider.dart';
 
 class AccessibilityScreen extends StatefulWidget {
-  const AccessibilityScreen({Key? key}) : super(key: key);
+  const AccessibilityScreen({super.key});
 
   @override
   State<AccessibilityScreen> createState() => _AccessibilityScreenState();
@@ -17,11 +16,15 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
   bool textToSpeech = false;
   bool largeText = false;
   bool autoSubtitle = false;
-  bool highContrast = false;
+  // Nilai awal highContrast akan kita sinkronkan dengan provider
+  // bool highContrast = false; // Baris ini akan kita modifikasi
 
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context)!;
+    // Ambil nilai highContrast langsung dari provider
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final highContrast = themeProvider.isHighContrast;
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -29,18 +32,19 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 0,
         foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
-
         title: Row(
           children: [
-            Icon(Icons.accessibility_new, color: Theme.of(context).iconTheme.color),
+            Icon(Icons.accessibility_new,
+                color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.accessibilityMode, style: TextStyle(color: Theme.of(context).iconTheme.color)),
+            Text(local.accessibilityMode,
+                style: TextStyle(color: Theme.of(context).iconTheme.color)),
           ],
         ),
       ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: -30,
             left: -40,
             child: Opacity(
@@ -48,11 +52,10 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
               child: Icon(
                 Icons.accessibility_new,
                 size: 400,
-                color: const Color(0x3384BDC2),
+                color: Color(0x3384BDC2),
               ),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -62,7 +65,6 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                   title: local.textToSpeech,
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
-
                 ),
                 _buildToggleTile(
                   icon: Icons.format_size,
@@ -79,10 +81,13 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
                 _buildToggleTile(
                   icon: Icons.contrast,
                   title: local.highContrast,
+                  // Gunakan nilai dari provider
                   value: highContrast,
                   onChanged: (val) {
-                    setState(() => highContrast = val);
-                    Provider.of<ThemeProvider>(context, listen: false).toggleHighContrast(val);
+                    // Tidak perlu setState untuk highContrast karena sudah di-handle oleh provider
+                    // setState(() => highContrast = val);
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .toggleHighContrast(val);
                   },
                 ),
               ],

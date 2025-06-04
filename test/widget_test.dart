@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobapps/main.dart'; // 🔑 Import perbaikan
+import 'package:educonnect/main.dart'; // 🔑 Import perbaikan
 
 void main() {
   testWidgets('Smoke test: build MyApp', (WidgetTester tester) async {

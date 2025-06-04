@@ -2,14 +2,12 @@ import 'package:educonnect/screens/auth/accessibility_screen.dart';
 import 'package:educonnect/screens/auth/notification_screen.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:educonnect/providers/locale_provider.dart';
-import 'package:educonnect/providers/theme_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +21,17 @@ class SettingsScreen extends StatelessWidget {
         foregroundColor: Theme.of(context).appBarTheme.foregroundColor,
         title: Row(
           children: [
-            Icon(Icons.settings_outlined, color: Theme.of(context).iconTheme.color),
+            Icon(Icons.settings_outlined,
+                color: Theme.of(context).iconTheme.color),
             const SizedBox(width: 8),
-            Text(local.settings, style: TextStyle(color: Theme.of(context).iconTheme.color)),
+            Text(local.settings,
+                style: TextStyle(color: Theme.of(context).iconTheme.color)),
           ],
         ),
       ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: -30,
             left: -40,
             child: Opacity(
@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
               child: Icon(
                 Icons.settings_outlined,
                 size: 400,
-                color: const Color(0x3384BDC2),
+                color: Color(0x3384BDC2),
               ),
             ),
           ),
@@ -61,7 +61,8 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AccessibilityScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const AccessibilityScreen()),
                     );
                   },
                 ),
@@ -72,7 +73,8 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const NotificationScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationScreen()),
                     );
                   },
                 ),
@@ -111,7 +113,8 @@ class SettingsScreen extends StatelessWidget {
 
   Widget _buildLanguageDropdown(BuildContext context, AppLocalizations local) {
     final provider = Provider.of<LocaleProvider>(context);
-    String currentLang = provider.locale.languageCode == 'en' ? 'English' : 'Indonesia';
+    String currentLang =
+        provider.locale.languageCode == 'en' ? 'English' : 'Indonesia';
 
     return Card(
       elevation: 2,
