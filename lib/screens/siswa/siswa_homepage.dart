@@ -95,11 +95,27 @@ class SiswaHomepage extends StatelessWidget {
       childAspectRatio: 2.5, // Mengatur rasio lebar:tinggi kartu
       children: [
         _buildMaterialCard(
+<<<<<<< HEAD
             context, Icons.calculate, "Mathematics", Colors.orange),
         _buildMaterialCard(context, Icons.biotech, "Biology", Colors.green),
         _buildMaterialCard(context, Icons.science, "Chemistry", Colors.blue),
         _buildMaterialCard(
             context, Icons.rocket_launch, "Physics", Colors.purple),
+=======
+          context,
+          Icons.calculate,
+          "Mathematics",
+          Colors.orange,
+        ),
+        _buildMaterialCard(context, Icons.biotech, "Biology", Colors.green),
+        _buildMaterialCard(context, Icons.science, "Chemistry", Colors.blue),
+        _buildMaterialCard(
+          context,
+          Icons.rocket_launch,
+          "Physics",
+          Colors.purple,
+        ),
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
         _buildMaterialCard(context, Icons.history_edu, "History", Colors.red),
         _buildMaterialCard(context, Icons.flag, "Citizenship", Colors.teal),
       ],
@@ -107,14 +123,26 @@ class SiswaHomepage extends StatelessWidget {
   }
 
   Widget _buildMaterialCard(
+<<<<<<< HEAD
       BuildContext context, IconData icon, String title, Color color) {
+=======
+    BuildContext context,
+    IconData icon,
+    String title,
+    Color color,
+  ) {
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
     return GestureDetector(
       onTap: () {
         // Panggil callback yang dikirim dari MainDashboardPage
         onSubjectSelected(title);
       },
       child: Card(
+<<<<<<< HEAD
         color: color.withAlpha((255 * 0.1).round()),
+=======
+        color: color.withOpacity(0.1),
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 0,
         child: Center(
@@ -143,8 +171,15 @@ class SiswaHomepage extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: ListTile(
           leading: const Icon(Icons.assignment, color: Colors.blueAccent),
+<<<<<<< HEAD
           title:
               Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+=======
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
           subtitle: Text(date),
           trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         ),

@@ -1,9 +1,12 @@
-import 'package:flutter/material.dart';
-import 'sub_materi_page.dart';
+// lib/screens/siswa/materi_page.dart
 
-class MateriPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+
+class MateriPage extends StatelessWidget {
+  // Parameter wajib yang akan diisi dari SiswaHomepage
   final String selectedSubject;
 
+<<<<<<< HEAD
   const MateriPage({super.key, required this.selectedSubject});
 
   @override
@@ -116,40 +119,51 @@ class _MateriPageState extends State<MateriPage> {
     ],
     // Tambahkan materi lainnya di sini jika perlu
   };
+=======
+  const MateriPage({Key? key, required this.selectedSubject}) : super(key: key);
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
 
   @override
   Widget build(BuildContext context) {
-    final filteredMaterials = getFilteredMaterials();
-
+    // Contoh UI sederhana untuk halaman materi:
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          selectedSubject,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Container(
+        color: Colors.grey[100],
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: selectedSubject,
-                    isExpanded: true,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSubject = value!;
-                      });
-                    },
-                    items: subjects
-                        .map((subject) => DropdownMenuItem(
-                              value: subject,
-                              child: Text(subject),
-                            ))
-                        .toList(),
-                  ),
+            // Judul materi
+            Text(
+              'Materi: $selectedSubject',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Contoh konten materi
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Di sini akan ditampilkan detail materi untuk "$selectedSubject".\n\n'
+                  'Anda bisa menambahkan daftar sub‐materi, video, PDF, atau konten lain sesuai kebutuhan.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                 ),
               ),
             ),
+<<<<<<< HEAD
             const SizedBox(height: 20),
             ...filteredMaterials.map((material) {
               return Card(
@@ -175,6 +189,8 @@ class _MateriPageState extends State<MateriPage> {
                 ),
               );
             }),
+=======
+>>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
           ],
         ),
       ),
