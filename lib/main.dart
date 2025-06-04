@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'screens/auth/signup_page.dart';
-import 'screens/auth/settings_screen.dart';
+
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
+
+// ✅ Import halaman siswa
+import 'screens/siswa/siswa_homepage.dart';
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Colors.black,
   primaryColor: Colors.white,
-  colorScheme: ColorScheme.highContrastDark(),
+  colorScheme: const ColorScheme.highContrastDark(),
   textTheme: const TextTheme(
     bodyLarge: TextStyle(fontSize: 18, color: Colors.white),
     bodyMedium: TextStyle(fontSize: 16, color: Colors.white),
@@ -48,21 +50,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EduConnect',
-      locale: localeProvider.locale,
-      supportedLocales: const [
-        Locale('en'),
-        Locale('id'),
-      ],
+      locale: localeProvider.locale ?? const Locale('id'),
+      supportedLocales: const [Locale('en'), Locale('id')],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[100],
+      ),
       darkTheme: highContrastTheme,
-      themeMode: themeProvider.isHighContrast ? ThemeMode.dark : ThemeMode.light,
-      home: const SignupScreen(),
+      themeMode: themeProvider.isHighContrast
+          ? ThemeMode.dark
+          : ThemeMode.light,
+
+      // ✅ Langsung ke SiswaHomepage
+      home: SiswaHomepage(
+        onSubjectSelected: (subject) {
+          // Sementara cuma print ke console
+          debugPrint("Subject selected: $subject");
+        },
+      ),
     );
   }
 }
