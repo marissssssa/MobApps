@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
-import 'screens/siswa/siswa_homepage.dart';
+import 'screens/orang_tua/orang_tua_homepage.dart';
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -63,11 +63,14 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.isHighContrast
           ? ThemeMode.dark
           : ThemeMode.light,
-      home: SiswaHomepage(
-        onSubjectSelected: (subject) {
-          debugPrint("Subject selected: $subject");
-        },
-      ),
+
+      // Pastikan ini sesuai dengan nama kelas di orang_tua_homepage.dart
+      home: const OrangTuaHomepage(),
+
+      // Kalau sewaktu-waktu mau pakai lagi SiswaHomepage, tinggal ganti ke:
+      // home: SiswaHomepage(onSubjectSelected: (subject) {
+      //   debugPrint("Subject selected: $subject");
+      // }),
     );
   }
 }
