@@ -1,3 +1,4 @@
+import 'package:educonnect/screens/auth/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,8 @@ import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
 import 'screens/siswa/siswa_homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -56,6 +59,13 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      builder: (context, child) {
+        final scale = themeProvider.isLargeText ? 1.4 : 1.0;
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
+          child: child!,
+        );
+      },
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[100],
       ),
