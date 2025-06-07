@@ -32,6 +32,8 @@ dependencies:
   path_provider: ^2.0.15
   flutter:
     sdk: flutter
+  video_player: ^2.8.1 # Gunakan versi terbaru yang stabil
+  chewie: ^1.7.4 # Ini membantu dalam kontrol UI video
   provider: 6.1.5
   flutter_localizations:
     sdk: flutter
@@ -66,8 +68,8 @@ flutter:
 
   assets:
     - assets/images/LOGO.png
-    - assets/materi/Aljabar.pdf
-    - assets/materi/Gerak Lurus Beraturan.pdf
+    - assets/materi/
+    - assets/video/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

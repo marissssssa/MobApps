@@ -9,6 +9,7 @@ import 'l10n/app_localizations.dart';
 import 'screens/siswa/siswa_homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:educonnect/screens/main_dashboard_page.dart';
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -73,11 +74,7 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.isHighContrast
           ? ThemeMode.dark
           : ThemeMode.light,
-      home: SiswaHomepage(
-        onSubjectSelected: (subject) {
-          debugPrint("Subject selected: $subject");
-        },
-      ),
+      home: MainDashboardPage(role: UserRole.siswa)
     );
   }
 }
