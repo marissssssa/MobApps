@@ -33,15 +33,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    # Logo aplikasi (sudah ada)
     - assets/images/LOGO.png
-<<<<<<< HEAD
-    # File materi PDF (sudah ada)
-    - assets/materi/Aljabar.pdf
-    - assets/materi/Gerak Lurus Beraturan.pdf
-    # Tambahkan progress_icon.png agar bisa dipanggil via Image.asset
-    - assets/images/progress_icon.png
-=======
     - assets/materi/
     - assets/video/
     - assets/audio/
@@ -72,6 +64,3 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
   generate: true
-
-
->>>>>>> 5cd694f4bd74c09cae28c8ffd279cab7c8745097
