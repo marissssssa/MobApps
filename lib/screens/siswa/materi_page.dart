@@ -81,7 +81,22 @@ class _MateriPageState extends State<MateriPage> {
   // Map untuk sub-materi video
   final Map<String, List<Map<String, dynamic>>> subMaterialsMapVideo = {
     'Hukum Newton': [
-      {'title': 'Video Hukum Newton 1', 'type': 'video', 'url': 'assets/video/Hukum_Newton.mp4'},
+      {'title': 'Hukum Newton 1-3', 'type': 'video', 'url': 'assets/video/Hukum_Newton.mp4'},
+    ],
+    'Perang Dunia II': [
+      {'title': 'Perang Dunia II', 'type': 'video', 'url': 'assets/video/Perang_Dunia_II.mp4'},
+    ],
+    'Struktur Atom': [
+      {'title': 'Perang Dunia II', 'type': 'video', 'url': 'assets/video/Struktur_Atom.mp4'},
+    ],
+  };
+
+  final Map<String, List<Map<String, dynamic>>> subMaterialsMapAudio = {
+    'Geometri': [
+      {'title': 'Geometri', 'type': 'audio', 'url': 'assets/audio/Geometri.mp3'},
+    ],
+    'Sel dan Jaringan': [
+      {'title': 'Sel dan Jaringan', 'type': 'audio', 'url': 'assets/audio/Sel_dan_Jaringan.mp3'},
     ],
   };
 
@@ -122,6 +137,7 @@ class _MateriPageState extends State<MateriPage> {
             ...filteredMaterials.map((material) {
               final label = material['label'];
               final isPdf = material['isPdf'] as bool? ?? true; // Ambil nilai isPdf, default ke true
+              final materialTypeIcon = material['type'] as IconData;
 
               return Card(
                 child: ListTile(
@@ -143,15 +159,21 @@ class _MateriPageState extends State<MateriPage> {
                         ),
                       );
                     } else {
-                      // Jika bukan PDF, gunakan subMaterialsMapVideo
-                      final subMaterials = subMaterialsMapVideo[label] ?? [];
+                      // Ini adalah bagian yang diubah
+                      List<Map<String, dynamic>> subMaterialsToPass = [];
+                      if (materialTypeIcon == Icons.play_circle_filled) { // Jika ikonnya adalah video
+                        subMaterialsToPass = subMaterialsMapVideo[label] ?? [];
+                      } else if (materialTypeIcon == Icons.volume_up) { // Jika ikonnya adalah audio
+                        subMaterialsToPass = subMaterialsMapAudio[label] ?? [];
+                      }
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => SubMateriPage(
                             title: label,
-                            subMaterials: subMaterials,
-                            isPdf: false, // Kirimkan flag isPdf
+                            subMaterials: subMaterialsToPass, // Gunakan subMaterialsToPass
+                            isPdf: false, // Kirimkan flag isPdf untuk media
                           ),
                         ),
                       );
