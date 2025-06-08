@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'tugas_page.dart';
+=======
+// import 'materi_page.dart'; // Tidak perlu diimpor di sini
+// import 'tugas_page.dart'; // Tidak perlu diimpor di sini
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 
 class SiswaHomepage extends StatelessWidget {
   final void Function(String subject) onSubjectSelected;
+  final void Function(String title) onHomeworkSelected; // Callback baru
+  final List<Map<String, dynamic>> allLatihan; // Data latihan dari MainDashboardPage
 
-  const SiswaHomepage({super.key, required this.onSubjectSelected});
+  const SiswaHomepage({
+    super.key,
+    required this.onSubjectSelected,
+    required this.onHomeworkSelected,
+    required this.allLatihan, // Tambahkan ini
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Filter latihan yang akan ditampilkan sebagai homework di homepage
+    // Contoh: Asumsikan 'Algebra II' dan 'World History' adalah latihan pertama
+    final List<Map<String, dynamic>> homeworkItems = allLatihan.where((item) =>
+      item['title'] == 'Algebra II' || item['title'] == 'World History'
+    ).toList();
+
+
     return Container(
       color: Colors.grey[100],
       child: SafeArea(
@@ -37,8 +56,10 @@ class SiswaHomepage extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            _buildHomeworkItem(context, "Algebra II", "20 Apr - 14 May"),
-            _buildHomeworkItem(context, "World History", "20 Apr - 14 May"),
+            // Tampilkan homework dari data yang diteruskan
+            ...homeworkItems.map((item) {
+              return _buildHomeworkItem(context, item['title'], item['deadline']);
+            }).toList(),
           ],
         ),
       ),
@@ -134,7 +155,6 @@ class SiswaHomepage extends StatelessWidget {
 >>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
     return GestureDetector(
       onTap: () {
-        // Panggil callback yang dikirim dari MainDashboardPage
         onSubjectSelected(title);
       },
       child: Card(
@@ -161,10 +181,8 @@ class SiswaHomepage extends StatelessWidget {
   Widget _buildHomeworkItem(BuildContext context, String title, String date) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const TugasPage()),
-        );
+        // Memanggil callback yang diteruskan dari MainDashboardPage
+        onHomeworkSelected(title);
       },
       child: Card(
         margin: const EdgeInsets.only(bottom: 12),

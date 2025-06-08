@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 // lib/main.dart
+=======
+import 'package:educonnect/screens/auth/settings_screen.dart';
+import 'package:flutter/foundation.dart'; 
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +15,7 @@ import 'package:educonnect/providers/locale_provider.dart';
 import 'package:educonnect/providerss/theme_provider.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
 
+<<<<<<< HEAD
 // Tema Terang (Normal)
 final ThemeData normalTheme = ThemeData.light().copyWith(
   primaryColor: Colors.teal, 
@@ -19,6 +25,16 @@ final ThemeData normalTheme = ThemeData.light().copyWith(
     foregroundColor: Colors.white,
   ),
 );
+=======
+import 'providers/locale_provider.dart';
+import 'providers/theme_provider.dart';
+import 'l10n/app_localizations.dart';
+
+import 'screens/orang_tua/orang_tua_homepage.dart';
+import 'screens/guru/profile_guru.dart';
+import 'package:educonnect/screens/main_dashboard_page.dart';
+import 'package:educonnect/l10n/l10n.dart';
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -52,7 +68,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -60,6 +75,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       title: 'EduConnect', 
 
       locale: localeProvider.locale ?? const Locale('id'), // Default ke 'id' jika null
@@ -67,12 +83,20 @@ class MyApp extends StatelessWidget {
         Locale('en', ''), 
         Locale('id', ''), 
       ],
+=======
+      title: 'EduConnect',
+      locale: localeProvider.locale,
+      darkTheme: ThemeData.dark(),
+      themeMode: themeProvider.themeMode,
+      supportedLocales: supportedLocales,
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+<<<<<<< HEAD
       
       // Pengaturan Tema menggunakan ThemeProvider
       theme: normalTheme, // Tema terang default
@@ -93,6 +117,29 @@ class MyApp extends StatelessWidget {
           },
         ),
       },
+=======
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[100],
+      ),
+
+      // kalau di Web, bungkus UI di dalam Container 375×812
+      home: kIsWeb
+          ? Center(
+        child: Container(
+          width: 375,
+          height: 812,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade400),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: const ProfileGuruScreen(),
+        ),
+      )
+      // kalau di Android/iOS sesungguhnya, langsung fullscreen
+          : const MainDashboardPage(role: UserRole.siswa),
+      //: const ProfileGuruScreen(),
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
     );
   }
 }

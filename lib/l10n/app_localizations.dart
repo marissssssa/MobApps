@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async';//
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -178,6 +178,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Schedule Reminder'**
   String get reminderNotification;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// No description provided for @parent.
+  ///
+  /// In en, this message translates to:
+  /// **'Parent'**
+  String get parent;
+
+  /// No description provided for @institution.
+  ///
+  /// In en, this message translates to:
+  /// **'Institution'**
+  String get institution;
+
+  /// No description provided for @publicHighSchool.
+  ///
+  /// In en, this message translates to:
+  /// **'Public High School'**
+  String get publicHighSchool;
+
+  /// No description provided for @notificationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Settings'**
+  String get notificationSettings;
+
+  /// No description provided for @downloadMaterials.
+  ///
+  /// In en, this message translates to:
+  /// **'Material Download'**
+  String get downloadMaterials;
+
+  /// No description provided for @clearCache.
+  ///
+  /// In en, this message translates to:
+  /// **'Clean Cache'**
+  String get clearCache;
+
+  /// No description provided for @systemLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get systemLanguage;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @indonesian.
+  ///
+  /// In en, this message translates to:
+  /// **'Indonesian'**
+  String get indonesian;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -205,9 +295,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+          'an issue with the localizations generation tool. Please file an issue '
+          'on GitHub with a reproducible sample app and the gen-l10n configuration '
+          'that was used.'
   );
 }

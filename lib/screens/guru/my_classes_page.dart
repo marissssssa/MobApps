@@ -14,9 +14,16 @@ class MyClassesPage extends StatelessWidget {
         title: const Text('My Classes'),
         backgroundColor: Colors.teal[200], // Samakan dengan tema DiscussionPage
       ),
+<<<<<<< HEAD
       body: const Center(
         child: Text('Halaman Daftar Kelas Saya'),
       ),
     );
   }
 }
+=======
+      body: const Center(child: Text('Halaman Daftar Kelas Saya')),
+    );
+  }
+}
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48

@@ -1,43 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:educonnect/l10n/l10n.dart';
+//
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // 1. Menggunakan Scaffold untuk struktur halaman dasar (AppBar, Body, dll.)
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final localeProvider = Provider.of<LocaleProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Profile"),
-        // Pengaturan AppBar agar terlihat bersih seperti di desain
+        title: Text(l10n.profile),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
+        titleTextStyle: TextStyle(
+          color: Theme.of(context).textTheme.titleLarge?.color,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
       ),
-      // 2. Menggunakan ListView agar konten bisa di-scroll jika tidak muat di layar kecil
       body: ListView(
         padding: const EdgeInsets.all(24.0),
         children: [
-          // --- BAGIAN PROFIL ATAS ---
           Column(
             children: [
-              // 3. Menggunakan CircleAvatar untuk foto profil bulat sempurna
               const CircleAvatar(
                 radius: 50,
-                // Di aplikasi nyata, URL ini akan datang dari data pengguna
                 backgroundImage: NetworkImage(
                   "https://i.pravatar.cc/150?img=12",
-                ), // Placeholder image
+                ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                "Frank Sinatra", // Diambil dari desain
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              Text(
+                "Frank Sinatra",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
@@ -45,11 +55,10 @@ class ProfilePage extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 24),
-              // 4. Menggunakan ElevatedButton untuk tombol yang benar
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF52C1B9), // Warna dari Figma
+                  backgroundColor: const Color(0xFF52C1B9),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -58,9 +67,9 @@ class ProfilePage extends StatelessWidget {
                     vertical: 15,
                   ),
                 ),
-                child: const Text(
-                  "Edit Profile",
-                  style: TextStyle(
+                child: Text(
+                  l10n.editProfile,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -72,43 +81,45 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 32),
           const Divider(),
 
-          // --- BAGIAN DAFTAR MENU ---
-          // 5. Menggunakan ListTile untuk setiap item menu agar rapi dan konsisten
+          // Menu Items
           _buildProfileMenuItem(
+            context: context,
             icon: Icons.person_outline,
-            title: "Role",
-            subtitle: "Parent",
+            title: l10n.role,
+            subtitle: l10n.parent,
           ),
           _buildProfileMenuItem(
+            context: context,
             icon: Icons.school_outlined,
-            title: "Institution",
-            subtitle: "Public High School",
+            title: l10n.institution,
+            subtitle: l10n.publicHighSchool,
           ),
+
+          _buildLanguageMenuItem(context, localeProvider, l10n),
+
           _buildProfileMenuItem(
-            icon: Icons.language_outlined,
-            title: "Language",
-          ),
-          _buildProfileMenuItem(
+            context: context,
             icon: Icons.notifications_outlined,
-            title: "Notification settings",
+            title: l10n.notificationSettings,
           ),
+
+          _buildThemeMenuItem(context, themeProvider, l10n),
+
           _buildProfileMenuItem(
-            icon: Icons.color_lens_outlined,
-            title: "Theme",
-            subtitle: "Light",
-          ),
-          _buildProfileMenuItem(
+            context: context,
             icon: Icons.download_for_offline_outlined,
-            title: "Download materials",
+            title: l10n.downloadMaterials,
           ),
           _buildProfileMenuItem(
+            context: context,
             icon: Icons.delete_sweep_outlined,
-            title: "Clear Cache",
+            title: l10n.clearCache,
           ),
           const Divider(),
           _buildProfileMenuItem(
+            context: context,
             icon: Icons.logout,
-            title: "Log out",
+            title: l10n.logout,
             textColor: Colors.red,
             isLogout: true,
           ),
@@ -118,10 +129,11 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildProfileMenuItem({
+    required BuildContext context,
     required IconData icon,
     required String title,
     String? subtitle,
-    Color textColor = Colors.black,
+    Color? textColor,
     bool isLogout = false,
   }) {
     return ListTile(
@@ -129,11 +141,120 @@ class ProfilePage extends StatelessWidget {
       leading: Icon(icon, color: textColor),
       title: Text(
         title,
-        style: TextStyle(fontWeight: FontWeight.w500, color: textColor),
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          color: textColor ?? Theme.of(context).textTheme.bodyLarge?.color,
+        ),
       ),
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: isLogout ? null : const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {},
+    );
+  }
+
+  Widget _buildLanguageMenuItem(
+      BuildContext context,
+      LocaleProvider localeProvider,
+      AppLocalizations l10n,
+      ) {
+    final currentLocale = localeProvider.locale;
+    String currentLanguage = l10n.english; // Default ke English
+
+    if (currentLocale != null) {
+      switch (currentLocale.languageCode) {
+        case 'en':
+          currentLanguage = l10n.english;
+          break;
+        case 'id':
+          currentLanguage = l10n.indonesian;
+          break;
+      }
+    }
+
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.language_outlined),
+      title: Text(
+        l10n.language,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Theme.of(context).textTheme.bodyLarge?.color,
+        ),
+      ),
+      subtitle: Text(currentLanguage),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text(l10n.english),
+                  onTap: () {
+                    localeProvider.setLocale(const Locale('en'));
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text(l10n.indonesian),
+                  onTap: () {
+                    localeProvider.setLocale(const Locale('id'));
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildThemeMenuItem(
+      BuildContext context,
+      ThemeProvider themeProvider,
+      AppLocalizations l10n,
+      ) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.color_lens_outlined),
+      title: Text(
+        l10n.theme,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Theme.of(context).textTheme.bodyLarge?.color,
+        ),
+      ),
+      subtitle: Text(themeProvider.isDarkMode ? l10n.dark : l10n.light),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text(l10n.light),
+                  onTap: () {
+                    themeProvider.setThemeMode(ThemeMode.light);
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text(l10n.dark),
+                  onTap: () {
+                    themeProvider.setThemeMode(ThemeMode.dark);
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

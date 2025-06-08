@@ -1,6 +1,12 @@
 name: educonnect
+<<<<<<< HEAD
 description: A new Flutter project.
 
+=======
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -11,21 +17,33 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+<<<<<<< HEAD
 
   shared_preferences: ^2.2.3
   path_provider: ^2.1.5
   provider: ^6.0.5
   syncfusion_flutter_pdfviewer: 29.2.7 
   
+=======
+  video_player: ^2.8.1 # Gunakan versi terbaru yang stabil
+  chewie: ^1.7.4 # Ini membantu dalam kontrol UI video
+  file_picker: ^8.0.0
+  provider: 6.1.5
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
   flutter_localizations:
     sdk: flutter
 
+<<<<<<< HEAD
   flutter_gen: ^5.10.0 
   intl: any 
+=======
+  cupertino_icons: ^1.0.8
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+<<<<<<< HEAD
 
   flutter_lints: ^4.0.0
 
@@ -38,3 +56,42 @@ l10n:
     arb-dir: lib/l10n
     template-arb-file: app_en.arb
     output-localization-file: app_localizations.dart
+=======
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/LOGO.png
+    - assets/materi/
+    - assets/video/
+    - assets/audio/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/to/asset-from-package
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
+  generate: true
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48

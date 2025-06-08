@@ -4,6 +4,8 @@ import 'package:educonnect/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 // 'locale_provider' dihapus dari sini
 import 'package:educonnect/providers/theme_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class AccessibilityScreen extends StatefulWidget {
   const AccessibilityScreen({super.key});
@@ -16,8 +18,58 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
   bool textToSpeech = false;
   bool largeText = false;
   bool autoSubtitle = false;
+<<<<<<< HEAD
   // Nilai awal highContrast akan kita sinkronkan dengan provider
   // bool highContrast = false; // Baris ini akan kita modifikasi
+=======
+  bool highContrast = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadHighContrast();
+    _loadLargeText();
+  }
+
+  Future<void> _loadHighContrast() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isHighContrast = prefs.getBool('highContrast') ?? false;
+    setState(() {
+      highContrast = isHighContrast;
+    });
+  }
+
+  Future<void> _toggleHighContrast(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('highContrast', value);
+
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    //themeProvider.toggleHighContrast(value);
+
+    setState(() {
+      highContrast = value;
+    });
+  }
+
+  Future<void> _loadLargeText() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isLargeText = prefs.getBool('largeText') ?? false;
+    setState(() {
+      largeText = isLargeText;
+    });
+  }
+
+  Future<void> _toggleLargeText(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('largeText', value);
+
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    //themeProvider.toggleLargeText(value);
+
+    setState(() {
+      largeText = value;
+    });
+  }
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
 
   @override
   Widget build(BuildContext context) {
@@ -61,34 +113,52 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
             child: Column(
               children: [
                 _buildToggleTile(
+                  context: context,
                   icon: Icons.record_voice_over,
                   title: local.textToSpeech,
                   value: textToSpeech,
                   onChanged: (val) => setState(() => textToSpeech = val),
                 ),
+
                 _buildToggleTile(
+                  context: context,
                   icon: Icons.format_size,
                   title: local.largeText,
                   value: largeText,
-                  onChanged: (val) => setState(() => largeText = val),
+                  onChanged: _toggleLargeText,
+                  //onChanged: (val) {
+                  //  setState(() => largeText = val);
+                  //  Provider.of<ThemeProvider>(context, listen: false).toggleLargeText(val);
+                  //},
                 ),
+
                 _buildToggleTile(
+                  context: context,
                   icon: Icons.closed_caption,
                   title: local.autoSubtitle,
                   value: autoSubtitle,
                   onChanged: (val) => setState(() => autoSubtitle = val),
                 ),
                 _buildToggleTile(
+                  context: context,
                   icon: Icons.contrast,
                   title: local.highContrast,
                   // Gunakan nilai dari provider
                   value: highContrast,
+<<<<<<< HEAD
                   onChanged: (val) {
                     // Tidak perlu setState untuk highContrast karena sudah di-handle oleh provider
                     // setState(() => highContrast = val);
                     Provider.of<ThemeProvider>(context, listen: false)
                         .toggleHighContrast(val);
                   },
+=======
+                  onChanged: _toggleHighContrast,
+                  //onChanged: (val) {
+                  //  setState(() => highContrast = val);
+                  //  Provider.of<ThemeProvider>(context, listen: false).toggleHighContrast(val);
+                  //},
+>>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
                 ),
               ],
             ),
@@ -99,6 +169,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
   }
 
   Widget _buildToggleTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required bool value,

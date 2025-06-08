@@ -1,4 +1,4 @@
-// ignore: unused_import
+// ignore: unused_import//
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
@@ -49,4 +49,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reminderNotification => 'Schedule Reminder';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get role => 'Role';
+
+  @override
+  String get parent => 'Parent';
+
+  @override
+  String get institution => 'Institution';
+
+  @override
+  String get publicHighSchool => 'Public High School';
+
+  @override
+  String get notificationSettings => 'Notification Settings';
+
+  @override
+  String get downloadMaterials => 'Material Download';
+
+  @override
+  String get clearCache => 'Clean Cache';
+
+  @override
+  String get systemLanguage => 'Language';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get indonesian => 'Indonesian';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'Light';
 }

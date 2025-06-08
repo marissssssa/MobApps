@@ -12,6 +12,21 @@
   "notification": "Notifications",
   "taskNotification": "New Task",
   "announcement": "Announcements",
-  "reminderNotification": "Schedule Reminder"
+  "reminderNotification": "Schedule Reminder",
 
+  "profile": "Profile",
+  "editProfile": "Edit Profile",
+  "role": "Role",
+  "parent": "Parent",
+  "institution": "Institution",
+  "publicHighSchool": "Public High School",
+  "notificationSettings": "Notification Settings",
+  "downloadMaterials": "Material Download",
+  "clearCache": "Clean Cache",
+  "systemLanguage": "Language",
+  "english": "English",
+  "indonesian": "Indonesian",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light"
 }
