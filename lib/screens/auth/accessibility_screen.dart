@@ -40,7 +40,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     prefs.setBool('highContrast', value);
 
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-    themeProvider.toggleHighContrast(value);
+    //themeProvider.toggleHighContrast(value);
 
     setState(() {
       highContrast = value;
@@ -60,7 +60,7 @@ class _AccessibilityScreenState extends State<AccessibilityScreen> {
     prefs.setBool('largeText', value);
 
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-    themeProvider.toggleLargeText(value);
+    //themeProvider.toggleLargeText(value);
 
     setState(() {
       largeText = value;

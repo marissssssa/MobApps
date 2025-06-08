@@ -12,6 +12,22 @@
   "notification": "Notifikasi",
   "taskNotification": "Tugas Baru",
   "announcement": "Pengumuman",
-  "reminderNotification": "Pengingat Jadwal"
+  "reminderNotification": "Pengingat Jadwal",
+
+  "profile": "Profil",
+  "editProfile": "Edit Profil",
+  "role": "Peran",
+  "parent": "Orangtua",
+  "institution": "Institusi",
+  "publicHighSchool": "SMA Negeri",
+  "notificationSettings": "Pengaturan Notifikasi",
+  "downloadMaterials": "Materi Download",
+  "clearCache": "Bersihkan Cache",
+  "systemLanguage": "Bahasa",
+  "english": "Inggris",
+  "indonesian": "Indonesia",
+  "theme": "Tema",
+  "dark": "Gelap",
+  "light": "Terang"
 
 }

@@ -111,7 +111,7 @@ class SettingsScreen extends StatelessWidget {
 
   Widget _buildLanguageDropdown(BuildContext context, AppLocalizations local) {
     final provider = Provider.of<LocaleProvider>(context);
-    String currentLang = provider.locale.languageCode == 'en' ? 'English' : 'Indonesia';
+    //String currentLang = provider.locale.languageCode == 'en' ? 'English' : 'Indonesia';
 
     return Card(
       elevation: 2,
@@ -122,7 +122,7 @@ class SettingsScreen extends StatelessWidget {
         title: Text(local.language),
         trailing: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
-            value: currentLang,
+            //value: currentLang,
             items: const [
               DropdownMenuItem(value: 'Indonesia', child: Text('Indonesia')),
               DropdownMenuItem(value: 'English', child: Text('English')),
