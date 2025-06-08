@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:educonnect/widgets/custom_bottom_nav.dart';
+import 'package:educonnect/screens/shared/discussion_page.dart';
 
 class OrangTuaHomepage extends StatelessWidget {
   const OrangTuaHomepage({super.key});
+  static const String routeName = '/orang_tua';
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,20 @@ class OrangTuaHomepage extends StatelessWidget {
               "Davis's Progress",
               "View weekly learning progress",
             ),
-            const SizedBox(height: 16),
-            _buildDashboardCard(
-              Icons.forum,
-              "Forum",
-              "Join discussion and connect",
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(
+                  context,
+                  DiscussionPage.routeName,
+                  arguments: UserRole.orangTua,
+                );
+              },
+              child: _build DashboardCard(
+                Icons.forum,
+                "Forum",
+                "Join discussion and connect",
+              ),
             ),
             const SizedBox(height: 16),
             _buildDashboardCard(
@@ -40,6 +52,7 @@ class OrangTuaHomepage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomBottomNav(),
     );
   }
 
@@ -75,7 +88,6 @@ class OrangTuaHomepage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            // Placeholder untuk gambar ilustrasi
             Image.network(
               'https://via.placeholder.com/80',
               width: 80,

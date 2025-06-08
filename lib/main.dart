@@ -1,27 +1,24 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
-import 'screens/guru/guru_homepage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD
-=======
+import 'package:educonnect/screens/guru/guru_homepage.dart';
+import 'package:educonnect/screens/guru/my_classes_page.dart';
+import 'package:educonnect/screens/shared/discussion_page.dart';
+import 'package:educonnect/screens/siswa/siswa_homepage.dart'; 
+import 'package:educonnect/providers/locale_provider.dart';
+import 'package:educonnect/providerss/theme_provider.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
 
->>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
-import 'providers/locale_provider.dart';
-import 'providers/theme_provider.dart';
-import 'l10n/app_localizations.dart';
-
-<<<<<<< HEAD
-// LANGKAH 1: Definisikan kedua tema
-// Anda bisa mengkustomisasi tema normal ini sesuai kebutuhan
-final ThemeData normalTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.teal,
-  // Tambahkan kustomisasi lain jika perlu
+// Tema Terang (Normal)
+final ThemeData normalTheme = ThemeData.light().copyWith(
+  primaryColor: Colors.teal, 
+  scaffoldBackgroundColor: Colors.grey[100],
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.teal[400],
+    foregroundColor: Colors.white,
+  ),
 );
-=======
-// ✅ Import halaman siswa
-import 'screens/siswa/siswa_homepage.dart';
->>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -37,7 +34,7 @@ final ThemeData highContrastTheme = ThemeData(
     foregroundColor: Colors.white,
     titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
   ),
-  cardColor: Colors.grey,
+  cardColor: Colors.grey[800], 
   iconTheme: const IconThemeData(color: Colors.white),
 );
 
@@ -46,8 +43,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
-        // LANGKAH 2: Perbaiki cara membuat ThemeProvider. Tidak perlu argumen.
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()), 
       ],
       child: const MyApp(),
     ),
@@ -63,46 +59,40 @@ class MyApp extends StatelessWidget {
     final localeProvider = Provider.of<LocaleProvider>(context);
 
     return MaterialApp(
-<<<<<<< HEAD
-      title: 'MobApps',
-      // LANGKAH 3: Gunakan provider untuk memilih tema secara dinamis
-      theme: themeProvider.isHighContrast ? highContrastTheme : normalTheme,
-      locale: localeProvider.locale,
-      supportedLocales: const [
-        Locale('en'),
-        Locale('id'),
-      ],
-=======
       debugShowCheckedModeBanner: false,
-      title: 'EduConnect',
-      locale: localeProvider.locale ?? const Locale('id'),
-      supportedLocales: const [Locale('en'), Locale('id')],
->>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
+      title: 'EduConnect', 
+
+      locale: localeProvider.locale ?? const Locale('id'), // Default ke 'id' jika null
+      supportedLocales: const [
+        Locale('en', ''), 
+        Locale('id', ''), 
+      ],
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-<<<<<<< HEAD
-      home: const GuruHomepage(),
-=======
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[100],
-      ),
-      darkTheme: highContrastTheme,
+      
+      // Pengaturan Tema menggunakan ThemeProvider
+      theme: normalTheme, // Tema terang default
+      darkTheme: highContrastTheme, // Tema gelap untuk kontras tinggi
       themeMode: themeProvider.isHighContrast
           ? ThemeMode.dark
           : ThemeMode.light,
 
-      // ✅ Langsung ke SiswaHomepage
-      home: SiswaHomepage(
-        onSubjectSelected: (subject) {
-          // Sementara cuma print ke console
-          debugPrint("Subject selected: $subject");
-        },
-      ),
->>>>>>> 90ee457fe2d022664d411e9c86275447042a211a
+      // Pengaturan Rute (Navigasi)
+      initialRoute: GuruHomepage.routeName, // Halaman awal adalah GuruHomepage
+      routes: {
+        GuruHomepage.routeName: (context) => const GuruHomepage(),
+        MyClassesPage.routeName: (context) => const MyClassesPage(),
+        DiscussionPage.routeName: (context) => const DiscussionPage(),
+        SiswaHomepage.routeName: (context) => SiswaHomepage(
+          onSubjectSelected: (subject) { 
+            debugPrint("Dari main.dart - Subject selected: $subject");
+          },
+        ),
+      },
     );
   }
 }
