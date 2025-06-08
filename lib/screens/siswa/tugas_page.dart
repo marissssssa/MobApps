@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:educonnect/screens/siswa/latihan_detail_page.dart'; // Import LatihanDetailPage
+import 'package:educonnect/models/quiz_model.dart';
+import 'package:educonnect/screens/siswa/latihan_detail_page.dart';
 
 class TugasPage extends StatelessWidget {
-  // Terima data latihan dari MainDashboardPage
   final List<Map<String, dynamic>> allLatihan;
-  // Terima fungsi navigasi dari MainDashboardPage
   final void Function(String title) navigateToLatihanDetail;
+  final List<Quiz> allQuizzes;
+  final void Function(String title) openQuiz;
 
   const TugasPage({
     super.key,
     required this.allLatihan,
     required this.navigateToLatihanDetail,
+    required this.allQuizzes,
+    required this.openQuiz,
   });
-
-  final List<Map<String, dynamic>> kuis = const [
-    {'title': 'Geometri', 'deadline': '8 May 2025, 23:59 PM'},
-    {'title': 'Hukum Newton', 'deadline': '17 May 2025, 23:59 PM'},
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +26,33 @@ class TugasPage extends StatelessWidget {
           children: [
             const Text('Kuis', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            ...kuis.map((item) => Card(
-                  child: ListTile(
-                    title: Text(item['title']),
-                    subtitle: Text(item['deadline']),
+            ...allQuizzes.map((quiz) {
+              return Card(
+                color: quiz.isCompleted ? const Color.fromRGBO(160, 203, 196, 1) : null,
+                child: ListTile(
+                  title: Text(
+                    quiz.title,
+                    style: TextStyle(
+                      color: quiz.isCompleted ? Colors.white : Colors.black,
+                    ),
                   ),
-                )),
+                  subtitle: Text(
+                    quiz.deadline,
+                    style: TextStyle(
+                      color: quiz.isCompleted ? Colors.white70 : Colors.grey,
+                    ),
+                  ),
+                  onTap: quiz.isCompleted
+                      ? null
+                      : () {
+                          openQuiz(quiz.title);
+                        },
+                ),
+              );
+            }).toList(),
             const SizedBox(height: 16),
             const Text('Latihan', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            // Gunakan allLatihan yang diterima dari MainDashboardPage
             ...allLatihan.map((item) {
               return Card(
                 color: (item['uploadedFileNames'] != null && item['uploadedFileNames'].isNotEmpty)
@@ -59,7 +74,6 @@ class TugasPage extends StatelessWidget {
                             : Colors.grey),
                   ),
                   onTap: () {
-                    // Panggil fungsi navigasi yang diterima
                     navigateToLatihanDetail(item['title']);
                   },
                 ),
