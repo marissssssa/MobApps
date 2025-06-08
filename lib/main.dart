@@ -8,8 +8,12 @@ import 'providers/locale_provider.dart';
 import 'providers/theme_provider.dart';
 import 'l10n/app_localizations.dart';
 
+<<<<<<< HEAD
 import 'screens/orang_tua/orang_tua_homepage.dart';
 import 'screens/guru/profile_guru.dart';
+=======
+import 'package:educonnect/screens/main_dashboard_page.dart';
+>>>>>>> 5cd694f4bd74c09cae28c8ffd279cab7c8745097
 
 final ThemeData highContrastTheme = ThemeData(
   // … (tema kamu yang sudah ada)
@@ -59,6 +63,7 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.isHighContrast
           ? ThemeMode.dark
           : ThemeMode.light,
+<<<<<<< HEAD
 
       // ───── UBAH DI SINI ─────
       home: kIsWeb
@@ -77,6 +82,9 @@ class MyApp extends StatelessWidget {
             )
           // kalau di Android/iOS sesungguhnya, langsung fullscreen
           : const ProfileGuruScreen(),
+=======
+      home: MainDashboardPage(role: UserRole.siswa)
+>>>>>>> 5cd694f4bd74c09cae28c8ffd279cab7c8745097
     );
   }
 }
