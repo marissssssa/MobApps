@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
+import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class LatihanDetailPage extends StatefulWidget {
   final String title;
   final List<String>? initialFileNames;
-  final String question; // Properti baru untuk soal
+  final String question;
   final Function(String, List<String>?) onTurnIn;
 
   const LatihanDetailPage({
     Key? key,
     required this.title,
     this.initialFileNames,
-    required this.question, // Wajibkan properti 'question'
+    required this.question,
     required this.onTurnIn,
   }) : super(key: key);
 
@@ -31,7 +35,8 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
   }
 
   Future<void> _pickFile() async {
-    print('Attempting to pick file...');
+    final l10n = AppLocalizations.of(context)!;
+
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
@@ -42,15 +47,11 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
         setState(() {
           _uploadedFileNames.add(result.files.single.name);
         });
-        print('File picked successfully: ${result.files.single.name}');
-      } else {
-        print('File picker canceled by user.');
       }
     } catch (e) {
-      print('Error picking file: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error selecting file: $e')),
+          SnackBar(content: Text('${l10n.fileSelectionError}: $e')),
         );
       }
     }
@@ -60,30 +61,32 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
     setState(() {
       _uploadedFileNames.remove(fileNameToRemove);
     });
-    print('File removed: $fileNameToRemove');
   }
 
   void _turnIn() {
-    print('Turning in: ${widget.title} with files: $_uploadedFileNames');
     widget.onTurnIn(widget.title, _uploadedFileNames.isNotEmpty ? _uploadedFileNames : null);
     Navigator.pop(context);
-    print('Navigated back to previous page.');
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
+          onPressed: () => Navigator.pop(context),
         ),
-        title: Text(widget.title, style: const TextStyle(color: Colors.black)),
+        title: Text(
+          widget.title,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -91,16 +94,20 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
+              color: Theme.of(context).cardColor,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Kerjakan soal berikut:', style: TextStyle(fontSize: 16)),
+                    Text(
+                      l10n.workOnThisQuestion,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.question, // Menampilkan soal dari properti widget
-                      style: const TextStyle(fontSize: 14, color: Colors.black87), // Ubah warna agar lebih jelas
+                      widget.question,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
@@ -108,31 +115,45 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
             ),
             const SizedBox(height: 20),
 
-            // Tampilkan daftar file yang diunggah
+            // Uploaded files list
             ..._uploadedFileNames.map((fileName) => Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ListTile(
-                    title: Text(fileName),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () => _removeFile(fileName),
-                    ),
+              color: Theme.of(context).cardColor,
+              margin: const EdgeInsets.symmetric(vertical: 4.0),
+              child: ListTile(
+                title: Text(
+                  fileName,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                trailing: IconButton(
+                  icon: Icon(
+                    Icons.close,
+                    color: Theme.of(context).iconTheme.color,
                   ),
-                )),
+                  onPressed: () => _removeFile(fileName),
+                ),
+              ),
+            )),
 
-            // Tombol "Add or create" selalu ada
+            // Add file button
             GestureDetector(
               onTap: _pickFile,
               child: Card(
+                color: Theme.of(context).cardColor,
                 margin: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.add),
-                      SizedBox(width: 8),
-                      Text('Add or create', style: TextStyle(fontSize: 16)),
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        l10n.addOrCreate,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
                     ],
                   ),
                 ),
@@ -142,18 +163,19 @@ class _LatihanDetailPageState extends State<LatihanDetailPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                // Tombol "Turn in" aktif jika ada setidaknya satu file
                 onPressed: _uploadedFileNames.isNotEmpty ? _turnIn : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(160, 203, 196, 1),
+                  backgroundColor: isDarkMode
+                      ? const Color.fromRGBO(82, 193, 185, 1)
+                      : const Color.fromRGBO(160, 203, 196, 1),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
-                  'Turn in',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                child: Text(
+                  l10n.turnIn,
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ),

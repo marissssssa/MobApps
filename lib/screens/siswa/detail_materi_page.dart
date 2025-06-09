@@ -14,4 +14,4 @@ class DetailMateriPage extends StatelessWidget {
       body: SfPdfViewer.asset(filePath),
     );
   }
-}
+}//

@@ -166,4 +166,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finish => 'Finish';
+
+  @override
+  String get file => 'file';
+
+  @override
+  String get video => 'video';
+
+  @override
+  String get audio => 'audio';
+
+  @override
+  String get downloadSuccess => 'successfully downloaded to';
+
+  @override
+  String get downloadFailed => 'Failed to download';
+
+  @override
+  String get all => 'All';
+
+  @override
+  String get quizzes => 'Quizzes';
+
+  @override
+  String get exercises => 'Exercises';
+
+  @override
+  String get workOnThisQuestion => 'Work on this question:';
+
+  @override
+  String get addOrCreate => 'Add or create';
+
+  @override
+  String get turnIn => 'Turn in';
+
+  @override
+  String get fileSelectionError => 'File selection error';
+
+  @override
+  String get downloadStarted => 'Download started';
+
+  @override
+  String get materialViewer => 'Material Viewer';
 }

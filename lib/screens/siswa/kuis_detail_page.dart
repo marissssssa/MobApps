@@ -34,7 +34,7 @@ class QuizDetailPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
           onPressed: () => Navigator.pop(context),
-        ),
+        ),//
         title: Text(
           quiz.title,
           style: Theme.of(context).textTheme.titleLarge,

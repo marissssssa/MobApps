@@ -61,6 +61,31 @@
   "yes": "Yes",
   "no": "No",
   "writeYourAnswerHere": "Write your answer here...",
-  "finish": "Finish"
+  "finish": "Finish",
+
+  "file": "file",
+  "video": "video",
+  "audio": "audio",
+  "downloadSuccess": "successfully downloaded to",
+  "downloadFailed": "Failed to download",
+
+  "all": "All",
+  "biology": "Biology",
+  "chemistry": "Chemistry",
+  "citizenship": "Citizenship",
+  "history": "History",
+  "mathematics": "Mathematics",
+  "physics": "Physics",
+
+  "quizzes": "Quizzes",
+  "exercises": "Exercises",
+
+  "workOnThisQuestion": "Work on this question:",
+  "addOrCreate": "Add or create",
+  "turnIn": "Turn in",
+  "fileSelectionError": "File selection error",
+
+  "downloadStarted": "Download started",
+  "materialViewer": "Material Viewer"
 
 }

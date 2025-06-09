@@ -1,102 +1,117 @@
-// sub_materi_page.dart
 import 'package:flutter/material.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
+import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:educonnect/providers/theme_provider.dart';
 import 'detail_materi_page.dart';
 import 'video_player_page.dart';
 
 class SubMateriPage extends StatelessWidget {
   final String title;
   final List<Map<String, dynamic>> subMaterials;
-  final bool isPdf; // Menunjukkan apakah halaman ini berisi materi PDF (true) atau media (video/audio) (false)
+  final bool isPdf;
 
   const SubMateriPage({
     super.key,
     required this.title,
     required this.subMaterials,
-    this.isPdf = true, // Default ke true untuk kompatibilitas mundur
+    this.isPdf = true,
   });
 
-  // Fungsi yang diperbarui untuk mengunduh berbagai jenis file
   Future<void> _downloadFile(BuildContext context, String sourcePath, String titleToSaveAs) async {
+    final l10n = AppLocalizations.of(context)!;
+
     try {
       final byteData = await rootBundle.load(sourcePath);
       final dir = await getApplicationDocumentsDirectory();
-
-      // Ambil ekstensi file dari sourcePath (misal: 'pdf', 'mp4', 'mp3')
       final String fileExtension = sourcePath.split('.').last;
-      
-      final String fileName = '$titleToSaveAs.$fileExtension'; // Buat nama file lengkap
-      final file = File('${dir.path}/$fileName'); // Buat objek file
+      final String fileName = '$titleToSaveAs.$fileExtension';
+      final file = File('${dir.path}/$fileName');
 
-      await file.writeAsBytes(byteData.buffer.asUint8List()); // Tulis data ke file
+      await file.writeAsBytes(byteData.buffer.asUint8List());
 
-      // Tentukan tipe file untuk pesan yang lebih spesifik
-      String fileType = 'file';
+      String fileType = l10n.file;
       if (fileExtension == 'pdf') {
         fileType = 'PDF';
       } else if (['mp4', 'mov', 'avi', 'mkv'].contains(fileExtension.toLowerCase())) {
-        fileType = 'video';
+        fileType = l10n.video;
       } else if (['mp3', 'wav', 'aac', 'flac'].contains(fileExtension.toLowerCase())) {
-        fileType = 'audio';
+        fileType = l10n.audio;
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('$fileType "$titleToSaveAs" berhasil diunduh ke ${dir.path}/$fileName!')),
+        SnackBar(content: Text('$fileType "$titleToSaveAs" ${l10n.downloadSuccess} ${dir.path}')),
       );
     } catch (e) {
       print('Error downloading file: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Gagal mengunduh "$titleToSaveAs": ${e.toString()}')),
+        SnackBar(content: Text('${l10n.downloadFailed} "$titleToSaveAs": ${e.toString()}')),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
+    final isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
+      ),
       body: ListView.builder(
         itemCount: subMaterials.length,
         itemBuilder: (context, index) {
           final item = subMaterials[index];
           final String fileTitle = item['title']!;
-
-          // Tentukan jalur sumber untuk diunduh.
-          // Jika isPdf true, gunakan 'filePath'. Jika false (media), gunakan 'url'.
           final String? sourcePathForDownload = isPdf ? item['filePath'] : item['url'];
 
           return Card(
+            color: Theme.of(context).cardColor,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
-              // Ikon berbeda berdasarkan tipe halaman (PDF atau media)
-              leading: Icon(isPdf ? Icons.description : Icons.play_circle_filled),
-              title: Text(fileTitle),
-              // Tampilkan tombol unduh jika ada sumber yang bisa diunduh
+              leading: Icon(
+                isPdf ? Icons.description : Icons.play_circle_filled,
+                color: isDarkMode ? Colors.tealAccent : Theme.of(context).primaryColor,
+              ),
+              title: Text(
+                fileTitle,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               trailing: sourcePathForDownload != null
                   ? IconButton(
-                      icon: const Icon(Icons.download),
-                      onPressed: () => _downloadFile(context, sourcePathForDownload, fileTitle),
-                    )
-                  : null, // Tidak ada tombol download jika sourcePathForDownload null
+                icon: Icon(
+                  Icons.download,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                onPressed: () => _downloadFile(context, sourcePathForDownload, fileTitle),
+              )
+                  : null,
               onTap: () {
-                if (isPdf) { // Navigasi ke PDF Viewer
+                if (isPdf) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => DetailMateriPage(
                         title: fileTitle,
-                        filePath: item['filePath']!, // Pastikan 'filePath' ada untuk PDF
+                        filePath: item['filePath']!,
                       ),
                     ),
                   );
-                } else { // Navigasi ke Video/Audio Player
+                } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => VideoPlayerPage(
                         title: fileTitle,
-                        videoUrl: item['url']!, // Pastikan 'url' ada untuk video/audio
+                        videoUrl: item['url']!,
                       ),
                     ),
                   );

@@ -51,7 +51,7 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
           _finishQuiz(autoSubmit: true);
         }
       });
-    });
+    });//
   }
 
   String _formatDuration(Duration duration) {

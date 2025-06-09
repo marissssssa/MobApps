@@ -59,6 +59,31 @@
   "yes": "Ya",
   "no": "Tidak",
   "writeYourAnswerHere": "Tulis jawaban Anda di sini...",
-  "finish": "Selesai"
+  "finish": "Selesai",
+
+  "file": "file",
+  "video": "video",
+  "audio": "audio",
+  "downloadSuccess": "berhasil diunduh ke",
+  "downloadFailed": "Gagal mengunduh",
+
+  "all": "Semua",
+  "biology": "Biologi",
+  "chemistry": "Kimia",
+  "citizenship": "Kewarganegaraan",
+  "history": "Sejarah",
+  "mathematics": "Matematika",
+  "physics": "Fisika",
+
+  "quizzes": "Kuis",
+  "exercises": "Latihan",
+
+  "workOnThisQuestion": "Kerjakan soal berikut:",
+  "addOrCreate": "Tambah atau buat",
+  "turnIn": "Kumpulkan",
+  "fileSelectionError": "Error memilih file",
+
+  "downloadStarted": "Download dimulai",
+  "materialViewer": "Penampil Materi"
 
 }

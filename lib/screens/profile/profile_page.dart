@@ -155,7 +155,7 @@ class ProfilePage extends StatelessWidget {
       AppLocalizations l10n,
       ) {
     final currentLocale = localeProvider.locale;
-    String currentLanguage = l10n.english; // Default ke English
+    String currentLanguage = l10n.english;
 
     if (currentLocale != null) {
       switch (currentLocale.languageCode) {

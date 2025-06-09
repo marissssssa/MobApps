@@ -1,4 +1,3 @@
-import 'package:educonnect/screens/auth/settings_screen.dart';
 import 'package:flutter/foundation.dart'; // ← untuk kIsWeb
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

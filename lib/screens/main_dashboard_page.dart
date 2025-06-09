@@ -74,13 +74,13 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       ],
     ),
   ];
-
+  /*
   void _navigateToSubject(String subject) {
     setState(() {
       _selectedSubject = subject;
       _selectedIndex = 1;
     });
-  }
+  }*/
 
   void _markLatihanAsSubmitted(String title, List<String>? uploadedFileNames) {
     setState(() {
@@ -174,7 +174,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   List<Widget> _buildScreens() {
     return [
       _getHomepageForRole(),
-      MateriPage(selectedSubject: _selectedSubject),
+      MateriPage(selectedSubjectKey: _selectedSubject),
       TugasPage(
         allLatihan: _allLatihan,
         navigateToLatihanDetail: _navigateToLatihanDetail,
@@ -183,6 +183,13 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       ),
       const ProfilePage(),
     ];
+  }
+
+  void _navigateToSubject(String subject) {
+    setState(() {
+      _selectedSubject = subject.toLowerCase();
+      _selectedIndex = 1;
+    });
   }
 
   void _onItemTapped(int index) {

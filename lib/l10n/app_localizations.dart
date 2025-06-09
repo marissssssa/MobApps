@@ -412,6 +412,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish'**
   String get finish;
+
+  /// No description provided for @file.
+  ///
+  /// In en, this message translates to:
+  /// **'file'**
+  String get file;
+
+  /// No description provided for @video.
+  ///
+  /// In en, this message translates to:
+  /// **'video'**
+  String get video;
+
+  /// No description provided for @audio.
+  ///
+  /// In en, this message translates to:
+  /// **'audio'**
+  String get audio;
+
+  /// No description provided for @downloadSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'successfully downloaded to'**
+  String get downloadSuccess;
+
+  /// No description provided for @downloadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to download'**
+  String get downloadFailed;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @quizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get quizzes;
+
+  /// No description provided for @exercises.
+  ///
+  /// In en, this message translates to:
+  /// **'Exercises'**
+  String get exercises;
+
+  /// No description provided for @workOnThisQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Work on this question:'**
+  String get workOnThisQuestion;
+
+  /// No description provided for @addOrCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Add or create'**
+  String get addOrCreate;
+
+  /// No description provided for @turnIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn in'**
+  String get turnIn;
+
+  /// No description provided for @fileSelectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'File selection error'**
+  String get fileSelectionError;
+
+  /// No description provided for @downloadStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Download started'**
+  String get downloadStarted;
+
+  /// No description provided for @materialViewer.
+  ///
+  /// In en, this message translates to:
+  /// **'Material Viewer'**
+  String get materialViewer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

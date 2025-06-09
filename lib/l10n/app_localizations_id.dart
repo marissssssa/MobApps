@@ -166,4 +166,46 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get finish => 'Selesai';
+
+  @override
+  String get file => 'file';
+
+  @override
+  String get video => 'video';
+
+  @override
+  String get audio => 'audio';
+
+  @override
+  String get downloadSuccess => 'berhasil diunduh ke';
+
+  @override
+  String get downloadFailed => 'Gagal mengunduh';
+
+  @override
+  String get all => 'Semua';
+
+  @override
+  String get quizzes => 'Kuis';
+
+  @override
+  String get exercises => 'Latihan';
+
+  @override
+  String get workOnThisQuestion => 'Kerjakan soal berikut:';
+
+  @override
+  String get addOrCreate => 'Tambah atau buat';
+
+  @override
+  String get turnIn => 'Kumpulkan';
+
+  @override
+  String get fileSelectionError => 'Error memilih file';
+
+  @override
+  String get downloadStarted => 'Download dimulai';
+
+  @override
+  String get materialViewer => 'Penampil Materi';
 }

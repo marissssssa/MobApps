@@ -173,15 +173,28 @@ class SiswaHomepage extends StatelessWidget {
     );
   }
 
-  Widget _buildMaterialCard(
-      BuildContext context,
-      IconData icon,
-      String title,
-      Color color,
-      ) {
-    return GestureDetector(
-      onTap: () => onSubjectSelected(title),
-      child: Card(
+Widget _buildMaterialCard(
+  BuildContext context,
+  IconData icon,
+  String title,
+  Color color,
+) {
+  return GestureDetector(
+    onTap: () {
+
+      String subjectKey;
+      final l10n = AppLocalizations.of(context)!;
+      if (title == l10n.mathematics) subjectKey = 'mathematics';
+      else if (title == l10n.physics) subjectKey = 'physics';
+      else if (title == l10n.chemistry) subjectKey = 'chemistry';
+      else if (title == l10n.biology) subjectKey = 'biology';
+      else if (title == l10n.history) subjectKey = 'history';
+      else if (title == l10n.citizenship) subjectKey = 'citizenship';
+      else subjectKey = 'all';
+
+      onSubjectSelected(subjectKey);
+    },
+    child: Card(
         color: color.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -199,8 +212,8 @@ class SiswaHomepage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+  );
+}
 
   Widget _buildHomeworkItem(
       BuildContext context,
