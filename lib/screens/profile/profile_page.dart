@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
 import 'package:provider/provider.dart';
 import 'package:educonnect/providers/locale_provider.dart';
 import 'package:educonnect/providers/theme_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:educonnect/l10n/l10n.dart';
-//
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -183,32 +180,7 @@ class ProfilePage extends StatelessWidget {
       ),
       subtitle: Text(currentLanguage),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  title: Text(l10n.english),
-                  onTap: () {
-                    localeProvider.setLocale(const Locale('en'));
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Text(l10n.indonesian),
-                  onTap: () {
-                    localeProvider.setLocale(const Locale('id'));
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      },
+      onTap: () => _showLanguageDialog(context, localeProvider, l10n),
     );
   }
 
@@ -229,30 +201,89 @@ class ProfilePage extends StatelessWidget {
       ),
       subtitle: Text(themeProvider.isDarkMode ? l10n.dark : l10n.light),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  title: Text(l10n.light),
-                  onTap: () {
-                    themeProvider.setThemeMode(ThemeMode.light);
+      onTap: () => _showThemeDialog(context, themeProvider, l10n),
+    );
+  }
+
+  void _showLanguageDialog(
+      BuildContext context,
+      LocaleProvider localeProvider,
+      AppLocalizations l10n,
+      ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(l10n.language),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RadioListTile<Locale?>(
+                title: Text(l10n.english),
+                value: const Locale('en'),
+                groupValue: localeProvider.locale,
+                onChanged: (Locale? value) {
+                  if (value != null) {
+                    localeProvider.setLocale(value);
                     Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Text(l10n.dark),
-                  onTap: () {
-                    themeProvider.setThemeMode(ThemeMode.dark);
+                  }
+                },
+              ),
+              RadioListTile<Locale?>(
+                title: Text(l10n.indonesian),
+                value: const Locale('id'),
+                groupValue: localeProvider.locale,
+                onChanged: (Locale? value) {
+                  if (value != null) {
+                    localeProvider.setLocale(value);
                     Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          },
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showThemeDialog(
+      BuildContext context,
+      ThemeProvider themeProvider,
+      AppLocalizations l10n,
+      ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(l10n.theme),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RadioListTile<ThemeMode>(
+                title: Text(l10n.light),
+                value: ThemeMode.light,
+                groupValue: themeProvider.themeMode,
+                onChanged: (ThemeMode? value) {
+                  if (value != null) {
+                    themeProvider.setThemeMode(value);
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+              RadioListTile<ThemeMode>(
+                title: Text(l10n.dark),
+                value: ThemeMode.dark,
+                groupValue: themeProvider.themeMode,
+                onChanged: (ThemeMode? value) {
+                  if (value != null) {
+                    themeProvider.setThemeMode(value);
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ],
+          ),
         );
       },
     );

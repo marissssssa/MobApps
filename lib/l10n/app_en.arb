@@ -28,5 +28,39 @@
   "indonesian": "Indonesian",
   "theme": "Theme",
   "dark": "Dark",
-  "light": "Light"
+  "light": "Light",
+
+
+  "materials": "Materials",
+  "tasks": "Tasks",
+  "home": "Home",
+
+
+  "hello": "Hello",
+  "search": "Search...",
+  "materials": "Materials",
+  "homework": "Homework",
+  "mathematics": "Mathematics",
+  "biology": "Biology",
+  "chemistry": "Chemistry",
+  "physics": "Physics",
+  "history": "History",
+  "citizenship": "Citizenship",
+
+
+  "duration": "Duration",
+  "minutes": "minutes",
+  "remainingTime": "Remaining Time",
+  "seconds": "seconds",
+  "startQuiz": "Start",
+  "continueQuiz": "Continue",
+
+
+  "confirmation": "Confirmation",
+  "finishQuizConfirmation": "Are you sure you want to finish the quiz?",
+  "yes": "Yes",
+  "no": "No",
+  "writeYourAnswerHere": "Write your answer here...",
+  "finish": "Finish"
+
 }

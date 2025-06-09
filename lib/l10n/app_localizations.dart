@@ -1,4 +1,4 @@
-import 'dart:async';//
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -268,6 +268,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Light'**
   String get light;
+
+  /// No description provided for @materials.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials'**
+  String get materials;
+
+  /// No description provided for @tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @hello.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello'**
+  String get hello;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get search;
+
+  /// No description provided for @homework.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework'**
+  String get homework;
+
+  /// No description provided for @mathematics.
+  ///
+  /// In en, this message translates to:
+  /// **'Mathematics'**
+  String get mathematics;
+
+  /// No description provided for @biology.
+  ///
+  /// In en, this message translates to:
+  /// **'Biology'**
+  String get biology;
+
+  /// No description provided for @chemistry.
+  ///
+  /// In en, this message translates to:
+  /// **'Chemistry'**
+  String get chemistry;
+
+  /// No description provided for @physics.
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get physics;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @citizenship.
+  ///
+  /// In en, this message translates to:
+  /// **'Citizenship'**
+  String get citizenship;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get minutes;
+
+  /// No description provided for @remainingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Time'**
+  String get remainingTime;
+
+  /// No description provided for @seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'seconds'**
+  String get seconds;
+
+  /// No description provided for @startQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get startQuiz;
+
+  /// No description provided for @continueQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueQuiz;
+
+  /// No description provided for @confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmation'**
+  String get confirmation;
+
+  /// No description provided for @finishQuizConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to finish the quiz?'**
+  String get finishQuizConfirmation;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @writeYourAnswerHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your answer here...'**
+  String get writeYourAnswerHere;
+
+  /// No description provided for @finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -295,9 +439,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-          'an issue with the localizations generation tool. Please file an issue '
-          'on GitHub with a reproducible sample app and the gen-l10n configuration '
-          'that was used.'
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
   );
 }

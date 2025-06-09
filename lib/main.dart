@@ -137,7 +137,9 @@ class MyApp extends StatelessWidget {
         ),
       )
       // kalau di Android/iOS sesungguhnya, langsung fullscreen
-          : const MainDashboardPage(role: UserRole.siswa),
+
+
+      :const MainDashboardPage(role: UserRole.siswa),
       //: const ProfileGuruScreen(),
 >>>>>>> eb1a387076a9464f7959cf5a7009f06f1255ca48
     );

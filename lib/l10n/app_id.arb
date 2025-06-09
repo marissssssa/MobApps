@@ -28,6 +28,37 @@
   "indonesian": "Indonesia",
   "theme": "Tema",
   "dark": "Gelap",
-  "light": "Terang"
+  "light": "Terang",
+
+
+  "materials": "Materi",
+  "tasks": "Tugas",
+  "home": "Beranda",
+
+
+  "hello": "Halo",
+  "search": "Cari...",
+  "materials": "Materi",
+  "homework": "Tugas",
+  "mathematics": "Matematika",
+  "biology": "Biologi",
+  "chemistry": "Kimia",
+  "physics": "Fisika",
+  "history": "Sejarah",
+  "citizenship": "Kewarganegaraan",
+
+  "duration": "Durasi",
+  "minutes": "menit",
+  "remainingTime": "Sisa Waktu",
+  "seconds": "detik",
+  "startQuiz": "Mulai",
+  "continueQuiz": "Lanjutkan",
+
+  "confirmation": "Konfirmasi",
+  "finishQuizConfirmation": "Yakin ingin menyelesaikan kuis?",
+  "yes": "Ya",
+  "no": "Tidak",
+  "writeYourAnswerHere": "Tulis jawaban Anda di sini...",
+  "finish": "Selesai"
 
 }

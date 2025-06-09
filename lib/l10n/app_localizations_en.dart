@@ -1,4 +1,4 @@
-// ignore: unused_import//
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
@@ -94,4 +94,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get light => 'Light';
+
+  @override
+  String get materials => 'Materials';
+
+  @override
+  String get tasks => 'Tasks';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get hello => 'Hello';
+
+  @override
+  String get search => 'Search...';
+
+  @override
+  String get homework => 'Homework';
+
+  @override
+  String get mathematics => 'Mathematics';
+
+  @override
+  String get biology => 'Biology';
+
+  @override
+  String get chemistry => 'Chemistry';
+
+  @override
+  String get physics => 'Physics';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get citizenship => 'Citizenship';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get minutes => 'minutes';
+
+  @override
+  String get remainingTime => 'Remaining Time';
+
+  @override
+  String get seconds => 'seconds';
+
+  @override
+  String get startQuiz => 'Start';
+
+  @override
+  String get continueQuiz => 'Continue';
+
+  @override
+  String get confirmation => 'Confirmation';
+
+  @override
+  String get finishQuizConfirmation => 'Are you sure you want to finish the quiz?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get writeYourAnswerHere => 'Write your answer here...';
+
+  @override
+  String get finish => 'Finish';
 }
