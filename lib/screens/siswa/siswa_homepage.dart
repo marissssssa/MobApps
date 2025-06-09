@@ -1,60 +1,72 @@
 import 'package:flutter/material.dart';
-// import 'materi_page.dart'; // Tidak perlu diimpor di sini
-// import 'tugas_page.dart'; // Tidak perlu diimpor di sini
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/providers/theme_provider.dart';
+
 
 class SiswaHomepage extends StatelessWidget {
   final void Function(String subject) onSubjectSelected;
-  final void Function(String title) onHomeworkSelected; // Callback baru
-  final List<Map<String, dynamic>> allLatihan; // Data latihan dari MainDashboardPage
+  final void Function(String title) onHomeworkSelected;
+  final List<Map<String, dynamic>> allLatihan;
 
   const SiswaHomepage({
     super.key,
     required this.onSubjectSelected,
     required this.onHomeworkSelected,
-    required this.allLatihan, // Tambahkan ini
+    required this.allLatihan,
   });
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
+
     // Filter latihan yang akan ditampilkan sebagai homework di homepage
-    // Contoh: Asumsikan 'Algebra II' dan 'World History' adalah latihan pertama
     final List<Map<String, dynamic>> homeworkItems = allLatihan.where((item) =>
-      item['title'] == 'Algebra II' || item['title'] == 'World History'
+    item['title'] == 'Algebra II' || item['title'] == 'World History'
     ).toList();
 
-
     return Container(
-      color: Colors.grey[100],
+      color: Theme.of(context).colorScheme.background,
       child: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(20.0),
           children: [
             // --- Header ---
-            _buildHeader("Skeeter Davis"),
+            _buildHeader(context, "Skeeter Davis", l10n),
             const SizedBox(height: 24),
 
             // --- Search Bar ---
-            _buildSearchBar(),
+            _buildSearchBar(context, l10n),
             const SizedBox(height: 24),
 
             // --- Materials Section ---
-            const Text(
-              "Materials",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.materials,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 16),
             _buildMaterialsGrid(context),
             const SizedBox(height: 24),
 
             // --- Homework Section ---
-            const Text(
-              "Homework",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.homework,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 16),
-            // Tampilkan homework dari data yang diteruskan
             ...homeworkItems.map((item) {
-              return _buildHomeworkItem(context, item['title'], item['deadline']);
+              return _buildHomeworkItem(
+                context,
+                item['title'],
+                item['deadline'],
+                themeProvider.isDarkMode,
+              );
             }).toList(),
           ],
         ),
@@ -62,7 +74,7 @@ class SiswaHomepage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(String name) {
+  Widget _buildHeader(BuildContext context, String name, AppLocalizations l10n) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -70,12 +82,16 @@ class SiswaHomepage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello,",
-              style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+              "${l10n.hello},",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+              ),
             ),
             Text(
               name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
@@ -87,70 +103,98 @@ class SiswaHomepage extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchBar(BuildContext context, AppLocalizations l10n) {
     return TextField(
       decoration: InputDecoration(
-        hintText: 'Search...',
-        prefixIcon: const Icon(Icons.search),
+        hintText: l10n.search,
+        prefixIcon: Icon(Icons.search, color: Theme.of(context).iconTheme.color),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).cardColor,
+        contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
       ),
     );
   }
 
   Widget _buildMaterialsGrid(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    final subjects = [
+      {
+        'icon': Icons.calculate,
+        'title': l10n.mathematics,
+        'color': Colors.orange,
+      },
+      {
+        'icon': Icons.biotech,
+        'title': l10n.biology,
+        'color': Colors.green,
+      },
+      {
+        'icon': Icons.science,
+        'title': l10n.chemistry,
+        'color': Colors.blue,
+      },
+      {
+        'icon': Icons.rocket_launch,
+        'title': l10n.physics,
+        'color': Colors.purple,
+      },
+      {
+        'icon': Icons.history_edu,
+        'title': l10n.history,
+        'color': Colors.red,
+      },
+      {
+        'icon': Icons.flag,
+        'title': l10n.citizenship,
+        'color': Colors.teal,
+      },
+    ];
+
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
-      childAspectRatio: 2.5, // Mengatur rasio lebar:tinggi kartu
-      children: [
-        _buildMaterialCard(
+      childAspectRatio: 2.5,
+      children: subjects.map((subject) {
+        return _buildMaterialCard(
           context,
-          Icons.calculate,
-          "Mathematics",
-          Colors.orange,
-        ),
-        _buildMaterialCard(context, Icons.biotech, "Biology", Colors.green),
-        _buildMaterialCard(context, Icons.science, "Chemistry", Colors.blue),
-        _buildMaterialCard(
-          context,
-          Icons.rocket_launch,
-          "Physics",
-          Colors.purple,
-        ),
-        _buildMaterialCard(context, Icons.history_edu, "History", Colors.red),
-        _buildMaterialCard(context, Icons.flag, "Citizenship", Colors.teal),
-      ],
+          subject['icon'] as IconData,
+          subject['title'] as String,
+          subject['color'] as Color,
+        );
+      }).toList(),
     );
   }
 
   Widget _buildMaterialCard(
-    BuildContext context,
-    IconData icon,
-    String title,
-    Color color,
-  ) {
+      BuildContext context,
+      IconData icon,
+      String title,
+      Color color,
+      ) {
     return GestureDetector(
-      onTap: () {
-        onSubjectSelected(title);
-      },
+      onTap: () => onSubjectSelected(title),
       child: Card(
         color: color.withOpacity(0.1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
         elevation: 0,
         child: Center(
           child: ListTile(
             leading: Icon(icon, color: color),
             title: Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -158,23 +202,40 @@ class SiswaHomepage extends StatelessWidget {
     );
   }
 
-  Widget _buildHomeworkItem(BuildContext context, String title, String date) {
+  Widget _buildHomeworkItem(
+      BuildContext context,
+      String title,
+      String date,
+      bool isDarkMode,
+      ) {
     return GestureDetector(
-      onTap: () {
-        // Memanggil callback yang diteruskan dari MainDashboardPage
-        onHomeworkSelected(title);
-      },
+      onTap: () => onHomeworkSelected(title),
       child: Card(
         margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        color: Theme.of(context).cardColor,
         child: ListTile(
-          leading: const Icon(Icons.assignment, color: Colors.blueAccent),
+          leading: Icon(
+            Icons.assignment,
+            color: isDarkMode ? Colors.lightBlueAccent : Colors.blueAccent,
+          ),
           title: Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          subtitle: Text(date),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          subtitle: Text(
+            date,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+            color: Theme.of(context).iconTheme.color,
+          ),
         ),
       ),
     );

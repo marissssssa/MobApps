@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
+import 'package:provider/provider.dart';
 import 'package:educonnect/models/quiz_model.dart';
+import 'package:educonnect/providers/theme_provider.dart';
 
 class QuizAttemptPage extends StatefulWidget {
   final Quiz quiz;
@@ -44,7 +48,7 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
           _remainingTime = _remainingTime - const Duration(seconds: 1);
         } else {
           _timer.cancel();
-          _finishQuiz(autoSubmit: true); // Otomatis selesai jika waktu habis
+          _finishQuiz(autoSubmit: true);
         }
       });
     });
@@ -88,28 +92,24 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
     });
   }
 
-  // Tambahkan parameter opsional autoSubmit
   void _finishQuiz({bool autoSubmit = false}) {
-    // Jika bukan auto-submit, tampilkan konfirmasi
+    final l10n = AppLocalizations.of(context)!;
+
     if (!autoSubmit) {
       showDialog<bool>(
         context: context,
         builder: (BuildContext dialogContext) {
           return AlertDialog(
-            title: const Text('Konfirmasi'),
-            content: const Text('Yakin ingin menyelesaikan kuis?'),
+            title: Text(l10n.confirmation),
+            content: Text(l10n.finishQuizConfirmation),
             actions: <Widget>[
               TextButton(
-                child: const Text('Tidak'),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop(false); // Jangan selesaikan kuis
-                },
+                child: Text(l10n.no),
+                onPressed: () => Navigator.of(dialogContext).pop(false),
               ),
               TextButton(
-                child: const Text('Ya'),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop(true); // Selesaikan kuis
-                },
+                child: Text(l10n.yes),
+                onPressed: () => Navigator.of(dialogContext).pop(true),
               ),
             ],
           );
@@ -120,7 +120,6 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
         }
       });
     } else {
-      // Jika auto-submit (waktu habis), langsung selesaikan
       _performFinishActions();
     }
   }
@@ -132,11 +131,9 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
       _isFinished = true;
     });
 
-    // Navigasi kembali ke TugasPage
-    Navigator.of(context).pop(); // Pop QuizAttemptPage
-    Navigator.of(context).pop(); // Pop QuizDetailPage
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
-
 
   Future<bool> _onWillPop() async {
     _timer.cancel();
@@ -152,7 +149,10 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
     final currentQuestion = _currentQuestions[_currentQuestionIndex];
+    final isDarkMode = themeProvider.isDarkMode;
 
     return PopScope(
       canPop: false,
@@ -165,12 +165,12 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
         });
       },
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).iconTheme.color),
             onPressed: () {
               _onWillPop().then((value) {
                 if (value) {
@@ -179,14 +179,19 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
               });
             },
           ),
-          title: Text(widget.quiz.title, style: const TextStyle(color: Colors.black)),
+          title: Text(
+            widget.quiz.title,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Center(
                 child: Text(
                   _formatDuration(_remainingTime),
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -198,6 +203,7 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Card(
+                color: Theme.of(context).cardColor,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -205,12 +211,14 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                     children: [
                       Text(
                         '${_currentQuestionIndex + 1}',
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         currentQuestion.questionText,
-                        style: const TextStyle(fontSize: 16),
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
                   ),
@@ -225,7 +233,11 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                       onTap: _isFinished ? null : () => _saveStudentAnswer(option),
                       child: Card(
                         margin: const EdgeInsets.symmetric(vertical: 8.0),
-                        color: isSelected ? const Color.fromRGBO(160, 203, 196, 1) : Colors.white,
+                        color: isSelected
+                            ? isDarkMode
+                            ? const Color.fromRGBO(82, 193, 185, 1)
+                            : const Color.fromRGBO(160, 203, 196, 1)
+                            : Theme.of(context).cardColor,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
@@ -235,7 +247,9 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                                   option,
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: isSelected ? Colors.white : Colors.black,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : Theme.of(context).textTheme.bodyLarge?.color,
                                   ),
                                 ),
                               ),
@@ -253,12 +267,12 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                   controller: TextEditingController(text: currentQuestion.studentAnswer),
                   maxLines: 5,
                   decoration: InputDecoration(
-                    hintText: 'Tulis jawaban Anda di sini...',
+                    hintText: l10n.writeYourAnswerHere,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Theme.of(context).cardColor,
                   ),
                 ),
               const Spacer(),
@@ -275,10 +289,12 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                         onPressed: () => _goToQuestion(index),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _currentQuestionIndex == index
-                              ? Colors.teal
+                              ? Theme.of(context).colorScheme.primary
                               : hasAnswer
-                                  ? const Color.fromRGBO(160, 203, 196, 1)
-                                  : Colors.grey[300],
+                              ? isDarkMode
+                              ? const Color.fromRGBO(82, 193, 185, 1)
+                              : const Color.fromRGBO(160, 203, 196, 1)
+                              : Theme.of(context).colorScheme.surface,
                           minimumSize: const Size(40, 40),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -289,7 +305,7 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                           style: TextStyle(
                             color: _currentQuestionIndex == index || hasAnswer
                                 ? Colors.white
-                                : Colors.black,
+                                : Theme.of(context).textTheme.bodyLarge?.color,
                           ),
                         ),
                       ),
@@ -305,43 +321,51 @@ class _QuizAttemptPageState extends State<QuizAttemptPage> {
                     ElevatedButton(
                       onPressed: _isFinished ? null : _previousQuestion,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     )
                   else
                     const SizedBox(width: 60),
 
                   _currentQuestionIndex < _currentQuestions.length - 1
                       ? ElevatedButton(
-                          onPressed: _isFinished ? null : _nextQuestion,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(160, 203, 196, 1),
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Icon(Icons.arrow_forward, color: Colors.white),
-                        )
+                    onPressed: _isFinished ? null : _nextQuestion,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isDarkMode
+                          ? const Color.fromRGBO(82, 193, 185, 1)
+                          : const Color.fromRGBO(160, 203, 196, 1),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
+                  )
                       : ElevatedButton(
-                          onPressed: _isFinished ? null : () => _finishQuiz(), // Panggil _finishQuiz tanpa parameter
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Text(
-                            'Selesai',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
-                        ),
+                    onPressed: _isFinished ? null : () => _finishQuiz(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      l10n.finish,
+                      style: const TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
             ],

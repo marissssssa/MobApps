@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:educonnect/l10n/app_localizations.dart';
+import 'package:educonnect/l10n/l10n.dart';
+import 'package:educonnect/providers/theme_provider.dart';
+import 'package:educonnect/providers/locale_provider.dart';
 import 'package:educonnect/screens/guru/guru_homepage.dart';
 import 'package:educonnect/screens/siswa/siswa_homepage.dart';
 import 'package:educonnect/screens/orang_tua/orang_tua_homepage.dart';
@@ -7,9 +12,8 @@ import 'package:educonnect/screens/siswa/materi_page.dart';
 import 'package:educonnect/screens/siswa/tugas_page.dart';
 import 'package:educonnect/screens/siswa/latihan_detail_page.dart';
 import 'package:educonnect/screens/siswa/kuis_detail_page.dart';
-import 'package:educonnect/models/quiz_model.dart'; 
+import 'package:educonnect/models/quiz_model.dart';
 
-// Enum untuk mendefinisikan peran pengguna. Ini lebih aman daripada menggunakan String.
 enum UserRole { guru, siswa, orangTua }
 
 class MainDashboardPage extends StatefulWidget {
@@ -74,7 +78,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   void _navigateToSubject(String subject) {
     setState(() {
       _selectedSubject = subject;
-      _selectedIndex = 1; // ke tab Materi
+      _selectedIndex = 1;
     });
   }
 
@@ -106,7 +110,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     );
   }
 
-  // Fungsi untuk menandai kuis sebagai selesai dan menyimpan sisa waktu
   void _markQuizAsCompleted(String quizTitle, Duration remainingTime, List<QuizQuestion> answeredQuestions) {
     setState(() {
       int index = _allQuizzes.indexWhere((quiz) => quiz.title == quizTitle);
@@ -114,13 +117,12 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
         _allQuizzes[index] = _allQuizzes[index].copyWith(
           isCompleted: true,
           remainingTime: remainingTime,
-          questions: answeredQuestions, // Simpan jawaban siswa
+          questions: answeredQuestions,
         );
       }
     });
   }
 
-  // Fungsi untuk mengelola pembukaan kembali kuis (pause/resume timer)
   void _openQuiz(String quizTitle) {
     final selectedQuiz = _allQuizzes.firstWhere((quiz) => quiz.title == quizTitle);
 
@@ -130,7 +132,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
         builder: (context) => QuizDetailPage(
           quiz: selectedQuiz,
           onQuizStarted: (startedQuiz) {
-            // Perbarui waktu mulai kuis ketika dimulai
             setState(() {
               int index = _allQuizzes.indexWhere((q) => q.title == startedQuiz.title);
               if (index != -1) {
@@ -138,7 +139,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
               }
             });
           },
-          onQuizCompleted: _markQuizAsCompleted, // Meneruskan callback ini
+          onQuizCompleted: _markQuizAsCompleted,
           onQuizPaused: (pausedQuiz, remainingTime, currentQuestions) {
             setState(() {
               int index = _allQuizzes.indexWhere((q) => q.title == pausedQuiz.title);
@@ -177,8 +178,8 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       TugasPage(
         allLatihan: _allLatihan,
         navigateToLatihanDetail: _navigateToLatihanDetail,
-        allQuizzes: _allQuizzes, // Meneruskan data kuis
-        openQuiz: _openQuiz, // Meneruskan fungsi untuk membuka kuis
+        allQuizzes: _allQuizzes,
+        openQuiz: _openQuiz,
       ),
       const ProfilePage(),
     ];
@@ -187,7 +188,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
       if (index != 1) {
         _selectedSubject = 'All';
       }
@@ -196,21 +196,42 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final localeProvider = Provider.of<LocaleProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
+
     final screens = _buildScreens();
+
     return Scaffold(
-      body: screens[_selectedIndex],
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        child: screens[_selectedIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Material'),
-          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Task'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: l10n.home,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.book),
+            label: l10n.materials,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.assignment),
+            label: l10n.tasks,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: l10n.profile,
+          ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
       ),
     );
   }
