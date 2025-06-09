@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:educonnect/models/quiz_model.dart';
 import 'package:educonnect/screens/siswa/latihan_detail_page.dart';
 import 'package:educonnect/providers/theme_provider.dart';
-
+//
 class TugasPage extends StatelessWidget {
   final List<Map<String, dynamic>> allLatihan;
   final void Function(String title) navigateToLatihanDetail;

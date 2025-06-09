@@ -190,7 +190,7 @@ Widget _buildMaterialCard(
       else if (title == l10n.biology) subjectKey = 'biology';
       else if (title == l10n.history) subjectKey = 'history';
       else if (title == l10n.citizenship) subjectKey = 'citizenship';
-      else subjectKey = 'all';
+      else subjectKey = 'all';//
 
       onSubjectSelected(subjectKey);
     },
