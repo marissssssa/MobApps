@@ -83,7 +83,7 @@ class ProfilePage extends StatelessWidget {
             context: context,
             icon: Icons.person_outline,
             title: l10n.role,
-            subtitle: 'student',
+            subtitle: l10n.student,
           ),
           _buildProfileMenuItem(
             context: context,

@@ -63,6 +63,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parent => 'Parent';
 
   @override
+  String get student => 'Student';
+
+  @override
   String get institution => 'Institution';
 
   @override

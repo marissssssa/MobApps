@@ -63,6 +63,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get parent => 'Orangtua';
 
   @override
+  String get student => 'Murid';
+
+  @override
   String get institution => 'Institusi';
 
   @override

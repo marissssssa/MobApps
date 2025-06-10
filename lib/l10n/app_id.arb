@@ -18,6 +18,7 @@
   "editProfile": "Edit Profil",
   "role": "Peran",
   "parent": "Orangtua",
+  "student": "Murid",
   "institution": "Institusi",
   "publicHighSchool": "SMA Negeri",
   "notificationSettings": "Pengaturan Notifikasi",

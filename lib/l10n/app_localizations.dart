@@ -203,6 +203,12 @@ abstract class AppLocalizations {
   /// **'Parent'**
   String get parent;
 
+  /// No description provided for @student.
+  ///
+  /// In en, this message translates to:
+  /// **'Student'**
+  String get student;
+
   /// No description provided for @institution.
   ///
   /// In en, this message translates to:
