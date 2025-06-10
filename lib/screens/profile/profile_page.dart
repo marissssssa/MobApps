@@ -34,12 +34,12 @@ class ProfilePage extends StatelessWidget {
               const CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
-                  "https://i.pravatar.cc/150?img=12",
+                  "https://i.pravatar.cc/150?img=5",
                 ),
               ),
               const SizedBox(height: 16),
               Text(
-                "Frank Sinatra",
+                "Skeeter Davis",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "franksinatra72@gmail.com",
+                "skeeterdavis55@gmail.com",
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 24),
@@ -83,7 +83,7 @@ class ProfilePage extends StatelessWidget {
             context: context,
             icon: Icons.person_outline,
             title: l10n.role,
-            subtitle: l10n.parent,
+            subtitle: 'student',
           ),
           _buildProfileMenuItem(
             context: context,

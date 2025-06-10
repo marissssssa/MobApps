@@ -9,12 +9,14 @@ class SiswaHomepage extends StatelessWidget {
   final void Function(String subject) onSubjectSelected;
   final void Function(String title) onHomeworkSelected;
   final List<Map<String, dynamic>> allLatihan;
+  final VoidCallback onProfileTap;
 
   const SiswaHomepage({
     super.key,
     required this.onSubjectSelected,
     required this.onHomeworkSelected,
     required this.allLatihan,
+    required this.onProfileTap,
   });
 
   @override
@@ -95,9 +97,14 @@ class SiswaHomepage extends StatelessWidget {
             ),
           ],
         ),
-        const CircleAvatar(
-          radius: 30,
-          backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=5'),
+        GestureDetector(
+          onTap: () {
+            onProfileTap(); // Panggil callback yang diteruskan
+          },
+          child: const CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=5'),
+          ),
         ),
       ],
     );

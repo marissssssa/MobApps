@@ -165,6 +165,11 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
           onSubjectSelected: _navigateToSubject,
           onHomeworkSelected: _navigateToLatihanDetail,
           allLatihan: _allLatihan,
+          onProfileTap: () { // Tambahkan ini
+            setState(() { // setState untuk memperbarui UI
+              _selectedIndex = 3; // Mengarahkan ke indeks ProfilePage
+            });
+          },
         );
       case UserRole.orangTua:
         return const OrangTuaHomepage();

@@ -11,6 +11,7 @@ import 'screens/orang_tua/orang_tua_homepage.dart';
 import 'screens/guru/profile_guru.dart';
 import 'package:educonnect/screens/main_dashboard_page.dart';
 import 'package:educonnect/l10n/l10n.dart';
+import 'package:educonnect/screens/splash_screen.dart';
 
 final ThemeData highContrastTheme = ThemeData(
   brightness: Brightness.dark,
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
       )
       // kalau di Android/iOS sesungguhnya, langsung fullscreen
 
-      :const MainDashboardPage(role: UserRole.siswa),
+      :const SplashScreen(),
       //: const ProfileGuruScreen(),
     );
   }
